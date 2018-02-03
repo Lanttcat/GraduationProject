@@ -27,8 +27,8 @@ export const state = () => {
          * @type {object}
          */
         logoIcon: {
-            src: '',
-            alt: ''
+            src: '/static/img/icons/logo.png',
+            alt: 'logo'
         },
 
         /**
@@ -36,7 +36,7 @@ export const state = () => {
          *
          * @type {boolean}
          */
-        showMenu: true,
+        showMenu: false,
 
         /**
          * 是否展示左侧返回图标
@@ -50,7 +50,7 @@ export const state = () => {
          *
          * @type {boolean}
          */
-        showLogo: false,
+        showLogo: true,
 
         /**
          * 右侧操作按钮数组

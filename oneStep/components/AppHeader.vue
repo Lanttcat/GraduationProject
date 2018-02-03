@@ -3,12 +3,17 @@
         name="slide-down">
         <header class="app-header-wrapper" v-show="show">
             <div class="app-header-left">
-                <v-btn
+                <!-- <v-btn
                     icon
                     v-if="showMenu"
                     @click.native="handleClick('menu')">
                     <v-icon color="grey darken-4" class="app-header-icon">menu</v-icon>
-                </v-btn>
+                </v-btn> -->
+                <div @click="handleClick('logo')">
+                    <slot name="logo">
+                        <img v-if="logoIcon.src" :src="logoIcon.src" :alt="logoIcon.alt" class="app-header-logo">
+                    </slot>
+                </div>
                 <v-btn
                     icon
                     v-if="showBack"
@@ -17,7 +22,7 @@
                 </v-btn>
                 <div v-if="showLogo" @click="handleClick('logo')">
                     <slot name="logo">
-                        <img v-if="logoIcon.src" :src="logoIcon.src" :alt="logoIcon.alt" class="app-header-icon"></img>
+                        <img v-if="logoIcon.src" :src="logoIcon.src" :alt="logoIcon.alt" class="app-header-icon">
                     </slot>
                 </div>
             </div>
@@ -136,10 +141,15 @@ $btn-color = #fff
         input::-webkit-input-placeholder 
             font-family "lucida grande", "lucida sans unicode", lucida, helvetica, "Hiragino Sans GB", "Microsoft YaHei", "WenQuanYi Micro Hei", sans-serif;
     // 改变 icon 大小
+    .app-header-logo
+        margin 0 0.5rem
+        color $btn-color
+        width 52px
+
     .app-header-icon
         color $btn-color
-        width 20px
-        height 20px
-
+        width 36px
+        height 36px
+        line-height 36px
 
 </style>

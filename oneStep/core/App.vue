@@ -7,11 +7,11 @@
                 @click-menu="handleClickHeaderMenu"
                 @click-back="handleClickHeaderBack">
             </app-header>
-            <app-sidebar
+            <!-- <app-sidebar
                 @hide-sidebar = "handleHideSidebar"
                 @show-sidebar = "handleShowSidebar"
             >
-            </app-sidebar>
+            </app-sidebar> -->
             <transition
                 :name="pageTransitionEffect"
                 @before-enter="handleBeforeEnter"
