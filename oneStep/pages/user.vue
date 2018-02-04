@@ -29,8 +29,15 @@
                 :key="n"
                 >
                 <v-card flat tile class="user-setting_item">
-                    <v-flex xs6 full-height>
-                        <v-btn flat>登录/注册</v-btn>
+                    <v-flex full-height>
+                        <v-btn
+                            icon flat x-large
+                            style="position: relativel;top:10px">
+                            <v-icon class="app-header-icon">star</v-icon>
+                        </v-btn>
+                        <div>
+                            <v-btn flat small>我的收藏</v-btn>
+                        </div>
                     </v-flex>
                 </v-card>
             </v-flex>
@@ -100,7 +107,9 @@ export default {
 
 <style lang="stylus" scoped>
 @require '~@/assets/stylus/variable';
-
+ #app 
+    .app-view-with-header
+        top 0
 .content {
     display: flex;
     align-items: center;
