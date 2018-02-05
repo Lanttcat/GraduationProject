@@ -70,7 +70,6 @@ export default {
         },
 
         isHomePage() {
-            console.log(this.$route.name);
             if(this.$route.name === 'index') {
                 return true;
             }

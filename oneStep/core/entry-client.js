@@ -13,6 +13,9 @@ import arrayFindShim from 'array.prototype.find';
 import arrayIncludesShim from 'array-includes';
 import {stringify} from 'querystring';
 
+// 引入监控
+import nextRouterStayTime from '../plugin/ActionMonitor/index';
+
 import 'es6-promise/auto';
 import '@/assets/stylus/main.styl';
 
@@ -97,6 +100,7 @@ else {
 function handleMiddlewares() {
     router.beforeEach(async (to, from, next) => {
         // Avoid loop redirect with next(path)
+        nextRouterStayTime(from);
         const fromPath = from.fullPath.split('#')[0];
         const toPath = to.fullPath.split('#')[0];
         if (fromPath === toPath) {

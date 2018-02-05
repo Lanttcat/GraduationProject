@@ -6,7 +6,7 @@
                     v-for="nav in navs"
                     :key="nav.name"
                     :value="nav.avtive"
-                    flat primary
+                    flat
                     @click.native="handleNavClick(nav.route, nav.name)"
                     class="btn-nav"
                     :class="{'btn-nav-center':nav.center}">
