@@ -34,7 +34,7 @@ function install(Vue) {
     // 用户行为数据统计数据统计
     Vue.directive('actmoni', function (el, binding) {
         el.onclick = function () {
-            alert('dd');
+            // 数据统计 需要设计nginx的日志服务系统
         }
     });
 }

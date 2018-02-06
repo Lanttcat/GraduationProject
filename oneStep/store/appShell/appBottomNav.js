@@ -55,17 +55,18 @@ export const state = () => {
                 icon: '#icon-add',
                 text: '',
                 route: {
-                    path: 'edit'
+                    name:'edit',
+                    path: '/edit'
                 },
                 center: true
             },
             {
-                name: 'peiwan',
+                name: 'companion',
                 icon: '#icon-zhishipai',
                 text: '陪玩',
                 route: {
-                    name: 'home',
-                    path: '/'
+                    name: 'companion',
+                    path: '/companion'
                 },
                 center: false
             },
@@ -73,7 +74,10 @@ export const state = () => {
                 name: 'user',
                 icon: '#icon-nanshi',
                 text: '我的',
-                route: '/user',
+                route: {
+                    name: 'user',
+                    path: '/user'
+                },
                 center: false
             }
         ]

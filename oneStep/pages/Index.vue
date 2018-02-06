@@ -16,6 +16,17 @@
                   <div style="text-align: left">
                     <div class="headline">两天时间在济南怎么玩</div>
                     <div>两天的时间在济南其实足够了，并且冬天济南</div>
+                    <v-chip outline color="red">
+                        <v-icon left>label</v-icon>Tags
+                    </v-chip>
+                    <!-- <v-chip
+                        text-color='white'
+                        small>
+                        <v-avatar>
+                            <v-icon>account_circle</v-icon>
+                        </v-avatar>
+                        去处
+                    </v-chip> -->
                   </div>
                 </v-flex>
                 <v-flex xs5>
@@ -39,7 +50,7 @@
                 </v-flex>
                 <v-flex xs5>
                     <v-card-media
-                      src="/static/doc-images/cards/halcyon.png"
+                      src="../static/img/testimg/1.JPG"
                       height="125px"
                       contain
                     ></v-card-media>

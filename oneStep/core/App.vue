@@ -70,7 +70,8 @@ export default {
         },
 
         isHomePage() {
-            if(this.$route.name === 'index') {
+            var pathName = this.$route.name
+            if(pathName === 'index' || pathName === 'gonglue') {
                 return true;
             }
             else {
@@ -169,10 +170,10 @@ export default {
         //     &.slide-fade-leave-to
         //         transform: translateX(10px)
         //         opacity: 0
-.icon
-    width 4em 
-    height 4em
-    vertical-align -0.15em
-    fill currentColor
-    overflow hidden
+// .icon
+//     width 4em 
+//     height 4em
+//     vertical-align -0.15em
+//     fill currentColor
+//     overflow hidden
 </style>
