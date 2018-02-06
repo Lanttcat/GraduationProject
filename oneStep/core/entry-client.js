@@ -14,7 +14,7 @@ import arrayIncludesShim from 'array-includes';
 import {stringify} from 'querystring';
 
 // 引入监控
-import nextRouterStayTime from '../plugin/ActionMonitor/index';
+import {nextRouterStayTime} from '../plugin/ActionMonitor/index';
 
 import 'es6-promise/auto';
 import '@/assets/stylus/main.styl';

@@ -10,10 +10,13 @@ import {createRouter} from '@/.lavas/router';
 import {createStore} from '@/.lavas/store';
 import AppComponent from './App.vue';
 import Vuetify from 'vuetify';
+import {ActionMonitor} from '../plugin/ActionMonitor';
 
 Vue.use(Meta);
 
 Vue.use(Vuetify);
+
+Vue.use(ActionMonitor);
 
 Vue.config.productionTip = false;
 

@@ -3,7 +3,11 @@
  * @author lanyixing
  */
 
-let timeLog = {};
+
+// 统计数据
+let timeLog = {},
+    actionLog = {};
+
 let ActionMonitor = {};
 let initTime = 0;
 
@@ -22,4 +26,17 @@ function nextRouterStayTime(route) {
     initTime = (new Date()).getTime();
 }
 
-export default nextRouterStayTime;
+/**
+ * Vue插件入口
+ * @param {object} Vue 
+ */
+function install(Vue) {
+    // 用户行为数据统计数据统计
+    Vue.directive('actmoni', function (el, binding) {
+        el.onclick = function () {
+            alert('dd');
+        }
+    });
+}
+ActionMonitor.install = install;
+export {nextRouterStayTime, ActionMonitor};
