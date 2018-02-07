@@ -8,7 +8,7 @@
                     </div>
                     <v-layout row>
                         <v-flex xs6 full-height>
-                            <v-btn v-actmoni class="user-btn_login" color="amber accent-2" dark>登录/注册</v-btn>
+                            <v-btn @click="toLogin" v-actmoni class="user-btn_login" color="amber accent-2" dark>登录/注册</v-btn>
                         </v-flex>
                         <v-flex xs6>
                             <v-card-media
@@ -101,6 +101,12 @@ export default {
   },
   activated() {
     setState(this.$store);
+  },
+  methods: {
+      toLogin() {
+          console.log(this.$router);
+          this.$router.replace('Login');
+      }
   }
 };
 </script>
