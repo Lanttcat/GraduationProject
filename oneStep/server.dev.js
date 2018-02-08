@@ -4,19 +4,20 @@
  */
 
 const LavasCore = require('lavas-core-vue');
-const express = require('express');
+// const Koa = require('koa');
 const stoppable = require('stoppable');
+let app = require('./server/index');
 
 let port = process.env.PORT || 3000;
 let core = new LavasCore(__dirname);
-let app;
+// let app;
 let server;
 
 function startDevServer() {
-    app = express();
+    // app = new Koa();
     core.build()
         .then(() => {
-            app.use(core.expressMiddleware());
+            app.use(core.koaMiddleware());
 
             /**
              * server.close() only stop accepting new connections,

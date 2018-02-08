@@ -4,8 +4,9 @@
  */
 
 const LavasCore = require('lavas-core-vue');
-const express = require('express');
-const app = express();
+// const Koa = require('koa');
+// const app = new Koa();
+let app = require('./server/index');
 
 let port = process.env.PORT || 3000;
 
@@ -14,7 +15,7 @@ let core = new LavasCore(__dirname);
 core.init(process.env.NODE_ENV || 'production')
     .then(() => core.runAfterBuild())
     .then(() => {
-        app.use(core.expressMiddleware());
+        app.use(core.koaMiddleware());
         app.listen(port, () => {
             console.log('server started at localhost:' + port);
         });
