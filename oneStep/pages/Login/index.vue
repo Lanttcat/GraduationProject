@@ -24,46 +24,43 @@
                 </v-tabs-items>
             </v-tabs>
         </div> -->
-        <v-layout row>
+        <v-layout row class="login-form">
             <v-flex xs3>
                 <v-subheader>手机</v-subheader>
             </v-flex>
             <v-flex xs9>
-                <v-text-field
-                name="phone"
-                label='请输入手机号'
-                hint="输入手机号码"
-                v-model="phone"
-                min="11"
-                max='11'
-                class="input-group--focused"
-                ></v-text-field>
+                <input type="text" class="login-input" placeholder="手机号">
             </v-flex>
         </v-layout>
-        <v-layout row>
+        <v-layout row class="login-form">
             <v-flex xs3>
-                <v-subheader>密码</v-subheader>
+                <v-subheader>验证码</v-subheader>
             </v-flex>
             <v-flex xs5>
-                <v-text-field
-                name="pwd"
-                label='验证码'
-                hint="至少输入8位密码"
-                min="8"     
-                value=""
-                ></v-text-field>
+                <input type="text" class="login-input" placeholder="验证码">
             </v-flex>
             <v-flex xs4>
                 <div>
-                    <v-btn depressed>获取验证码</v-btn>
+                    <button class="login-btn_code">提交</button>
                 </div>
             </v-flex>
         </v-layout>
+        <v-layout row>
+            <v-flex xs12>
+                <p style="text-align:right" class="text-lg-right">忘记密码</p>
+            </v-flex>
+        </v-layout>
+        <v-layout>
+            <v-alert
+                type="success"
+                :value="alertww"
+                transition="scale-transition">
+                手机号错误
+            </v-alert>
+        </v-layout>
         <v-layout>
             <v-flex xs12>
-                <div>
-                    <v-btn depressed large>提交</v-btn>
-                </div>
+                <button class="login-btn">提交</button>
             </v-flex>
         </v-layout>
     </v-container>
@@ -77,7 +74,8 @@ export default {
         e2: false,
         e3: false,
         e4: false,
-        phone: '',
+        alertww:false,
+        phoneNum: '',
         tabs: ['登录', '注册'],
         active: null,
         text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.'
@@ -88,7 +86,40 @@ export default {
       next () {
         const active = parseInt(this.active)
         this.active = (active < 2 ? active + 1 : 0).toString()
+      },
+      verifyPhone (e) {
+            if (!(/^1[34578]\d{9}$/.test(this.phoneNum))) { 
+                this.alertww = true;
+                console.log(e);
+            }
+            else {
+                // 发送
+            }
       }
     }
   }
 </script>
+<style lang="stylus" scoped>
+@require '~@/assets/stylus/variable'
+.login-form
+    margin-bottom 2rem
+    border-bottom 1px solid $theme
+
+.login-input
+    width 100%
+    height 100%
+    outline none
+.login-btn_code
+    padding 0.8rem
+    width 100%
+    border-radius 5px
+    background $theme
+    text-align center
+.login-btn
+    width 100%
+    padding 1rem
+    border-radius 5px
+    background $theme
+    text-align center
+</style>
+
