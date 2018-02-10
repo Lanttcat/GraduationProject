@@ -1,29 +1,5 @@
 <template>
     <v-container fluid>
-        <!-- <div>
-            <v-tabs v-model="active">
-                <v-tabs-bar class="cyan" dark>
-                    <v-tabs-item
-                        v-for="tab in tabs"
-                        :key="tab"
-                        :href="'#' + tab"
-                        ripple>
-                        {{ tab.slice(-1) }}
-                    </v-tabs-item>
-                    <v-tabs-slider color="yellow"></v-tabs-slider>
-                </v-tabs-bar>
-                <v-tabs-items>
-                    <v-tabs-content
-                        v-for="tab in tabs"
-                        :key="tab"
-                        :id="tab">
-                        <v-card flat>
-                            <v-card-text>{{ text }}</v-card-text>
-                        </v-card>
-                    </v-tabs-content>
-                </v-tabs-items>
-            </v-tabs>
-        </div> -->
         <v-layout row class="login-form">
             <v-flex xs3>
                 <v-subheader>手机</v-subheader>
@@ -70,13 +46,9 @@ export default {
     name: 'login',
     data () {
       return {
-        e1: false,
-        e2: false,
-        e3: false,
-        e4: false,
-        alertww:false,
+        alertww: true,
         phoneNum: '',
-        tabs: ['登录', '注册'],
+        tipInfo: ['号码格式错误', '验证码错误'],
         active: null,
         text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.'
         
