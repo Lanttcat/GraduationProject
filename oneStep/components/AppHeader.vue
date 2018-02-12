@@ -125,6 +125,7 @@ $btn-color = #fff
     & > div
         display flex
         align-items center
+        background transparent
 
     .app-header-middle
         flex 1

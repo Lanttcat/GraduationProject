@@ -3,7 +3,6 @@
         <v-app>
             <app-header
                 class="app-shell-header"
-                v-if="isHomePage"
                 @click-menu="handleClickHeaderMenu"
                 @click-back="handleClickHeaderBack">
             </app-header>
@@ -31,9 +30,7 @@
                     ></router-view>
             </transition>
             <app-bottom-navigator
-                class="app-shell-footer"
-
-                >
+                class="app-shell-footer">
             </app-bottom-navigator>
             <update-toast></update-toast>
         </v-app>
@@ -67,16 +64,6 @@ export default {
 
         pageTransitionClass() {
             return `transition-${this.pageTransitionType}`;
-        },
-
-        isHomePage() {
-            var pathName = this.$route.name
-            if(pathName === 'index' || pathName === 'gonglue') {
-                return true;
-            }
-            else {
-                return false;
-            }
         }
     },
     methods: {

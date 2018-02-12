@@ -1,6 +1,7 @@
 <template>
     <div>
-        <v-carousel>
+        <loacl-header></loacl-header>
+        <!-- <v-carousel>
             <v-carousel-item
                 v-for="(item,i) in items"
                 v-bind:key="i"
@@ -8,7 +9,7 @@
                 transition="fade"
                 reverseTransition="fade">
             </v-carousel-item>
-        </v-carousel>
+        </v-carousel> -->
         <v-container grid-list-md text-xs-center class="home-feed">
             <h2>景点推荐</h2>
             <v-layout row class="card-item">
@@ -64,6 +65,7 @@
 </template>
 
 <script>
+import loaclHeader from '../components/LocalBanner'
 import {mapActions} from 'vuex';
 function setState(store) {
     store.dispatch('appShell/appHeader/setAppHeader', {
@@ -114,6 +116,9 @@ export default {
     },
     activated() {
         setState(this.$store);
+    },
+    components: {
+        'loacl-header': loaclHeader
     }
 };
 </script>
