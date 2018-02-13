@@ -43,7 +43,6 @@ function initDB(config) {
         return pool;
     }
     catch (e) {
-        console.log('数据库连接失败');
         return null;
     }
 }
@@ -58,5 +57,5 @@ function init() {
     return pool;
 }
 
-exports.init = init;
+moudle.exports = init;
 
