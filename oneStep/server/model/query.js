@@ -43,4 +43,4 @@ function sqlQuery(sql) {
     mysqlConnectPool = mysqlConnectPool || poll;
 })();
 
-moudle.exports = sqlQuery;
+module.exports = sqlQuery;

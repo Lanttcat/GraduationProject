@@ -57,5 +57,5 @@ function init() {
     return pool;
 }
 
-moudle.exports = init;
+module.exports = init;
 

@@ -8,4 +8,4 @@ const errorCode = {
     003: '数据库读取错误'
 }
 
-moudle.exports = errorCode;
+module.exports = errorCode;
