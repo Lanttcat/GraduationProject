@@ -5,7 +5,7 @@
                 <v-subheader>手机</v-subheader>
             </v-flex>
             <v-flex xs9>
-                <input type="text" class="login-input" placeholder="手机号">
+                <input type="text" class="login-input" v-model="phoneNum" placeholder="手机号">
             </v-flex>
         </v-layout>
         <v-layout row class="login-form">
@@ -17,7 +17,7 @@
             </v-flex>
             <v-flex xs4>
                 <div>
-                    <button class="login-btn_code">提交</button>
+                    <button @click="getCode" class="login-btn_code">提交</button>
                 </div>
             </v-flex>
         </v-layout>
@@ -43,55 +43,74 @@
 </template>
 <script>
 export default {
-    name: 'login',
-    data () {
-      return {
-        alertww: true,
-        phoneNum: '',
-        tipInfo: ['号码格式错误', '验证码错误'],
-        active: null,
-        text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.'
-        
-      }
+    name: "login",
+    data() {
+        return {
+            alertww: true,
+            phoneNum: "",
+            tipInfo: ["号码格式错误", "验证码错误"],
+            active: null,
+            text:
+                "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
+        };
     },
     methods: {
-      next () {
-        const active = parseInt(this.active)
-        this.active = (active < 2 ? active + 1 : 0).toString()
-      },
-      verifyPhone (e) {
-            if (!(/^1[34578]\d{9}$/.test(this.phoneNum))) { 
+        next() {
+            const active = parseInt(this.active);
+            this.active = (active < 2 ? active + 1 : 0).toString();
+        },
+        verifyPhone(e) {
+            if (!/^1[34578]\d{9}$/.test(this.phoneNum)) {
                 this.alertww = true;
                 console.log(e);
-            }
-            else {
+            } else {
                 // 发送
             }
-      }
+        },
+        getCode() {
+            console.log(this.phoneNum);
+            this.$http.get("/data/userInfo", {
+                phone: this.phoneNum
+            }).then(
+                function (res) {
+                    console.log(res);
+                },
+                function (err) {
+                    console.log(err)
+                }
+            );
+        }
     }
-  }
+};
 </script>
 <style lang="stylus" scoped>
-@require '~@/assets/stylus/variable'
-.login-form
-    margin-bottom 2rem
-    border-bottom 1px solid $theme
+@require '~@/assets/stylus/variable';
 
-.login-input
-    width 100%
-    height 100%
-    outline none
-.login-btn_code
-    padding 0.8rem
-    width 100%
-    border-radius 5px
-    background $theme
-    text-align center
-.login-btn
-    width 100%
-    padding 1rem
-    border-radius 5px
-    background $theme
-    text-align center
+.login-form {
+    margin-bottom: 2rem;
+    border-bottom: 1px solid $theme;
+}
+
+.login-input {
+    width: 100%;
+    height: 100%;
+    outline: none;
+}
+
+.login-btn_code {
+    padding: 0.8rem;
+    width: 100%;
+    border-radius: 5px;
+    background: $theme;
+    text-align: center;
+}
+
+.login-btn {
+    width: 100%;
+    padding: 1rem;
+    border-radius: 5px;
+    background: $theme;
+    text-align: center;
+}
 </style>
 

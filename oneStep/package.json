@@ -16,6 +16,7 @@
     "array.prototype.find": "^2.0.4",
     "axios": "^0.17.1",
     "cross-env": "^5.1.1",
+    "crypto": "^1.0.1",
     "es6-promise": "^4.1.1",
     "express": "^4.0.0",
     "fastclick": "^1.0.6",

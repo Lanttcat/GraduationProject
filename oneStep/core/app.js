@@ -5,6 +5,7 @@
 
 import Vue from 'vue';
 import Meta from 'vue-meta';
+import axios from 'axios';
 
 import {createRouter} from '@/.lavas/router';
 import {createStore} from '@/.lavas/store';
@@ -17,6 +18,8 @@ Vue.use(Meta);
 Vue.use(Vuetify);
 
 Vue.use(ActionMonitor);
+
+Vue.prototype.$http = axios;
 
 Vue.config.productionTip = false;
 

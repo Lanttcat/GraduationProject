@@ -24,6 +24,9 @@ function createCode() {
  * @param {number} phoneNum 
  */
 async function sendCode(phoneNum) {
+
+    // 返回的数据格式
+    // 1. code 2. null
     let phone = phoneNum;
     let code = createCode();
     try {
