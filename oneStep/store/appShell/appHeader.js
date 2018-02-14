@@ -15,6 +15,16 @@ export const state = () => {
         show: true,
 
         /**
+         * 顶部导航栏是否不透明
+         *
+         * @type {boolean}
+         */
+        showSite: {
+            '/': false,
+            '/gonglue': true
+        },
+
+        /**
          * 标题内容
          *
          * @type {string}

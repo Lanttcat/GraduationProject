@@ -15,10 +15,15 @@
             <v-layout row class="card-item">
                 <v-flex xs7>
                   <div style="text-align: left">
-                    <div class="headline">两天时间在济南怎么玩</div>
+                    <div class="headline" @click="TurnToArticle('11')">两天时间在济南怎么玩</div>
                     <div>两天的时间在济南其实足够了，并且冬天济南</div>
                     <v-chip outline color="red">
-                        <v-icon left>label</v-icon>Tags
+                        <!-- <v-icon left>label</v-icon> -->
+                        去处
+                    </v-chip>
+                    <v-chip outline color="red">
+                        <!-- <v-icon left>label</v-icon> -->
+                        标签
                     </v-chip>
                     <!-- <v-chip
                         text-color='white'
@@ -119,6 +124,17 @@ export default {
     },
     components: {
         'loacl-header': loaclHeader
+    },
+    methods: {
+        TurnToArticle: function (item) {
+            console.log(1111)
+            this.$router.push({
+                path: 'article',
+                query: {
+                    id: 111111
+                }
+            });
+        }
     }
 };
 </script>
@@ -144,4 +160,10 @@ export default {
         box-shadow none
 .carousel
     height 200px
+
+// 替换header
+#app .app-view.app-view-with-header
+    top 0
+.app-shell-header
+    color white
 </style>

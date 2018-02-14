@@ -28,10 +28,10 @@ export default {
 @require '~@/assets/stylus/variable'
 .local-banner
     position relative
-    top -52px
-    height 10rem
+    padding-top 52px
+    height 13rem
     // background $theme
-    background-image  url('../static/img/local_banner/banner.jpg')
+    background-image  url('../static/img/testimg/1.jpg')
     background-size cover
     color white
 

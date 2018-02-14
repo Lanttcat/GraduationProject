@@ -1,11 +1,15 @@
 <template>
     <div id="app">
         <v-app>
-            <app-header
+            <app-header v-if="themeStyle"
                 class="app-shell-header"
                 @click-menu="handleClickHeaderMenu"
                 @click-back="handleClickHeaderBack">
             </app-header>
+            <articleHeader
+                v-else>
+            </articleHeader>
+
             <!-- <app-sidebar
                 @hide-sidebar = "handleHideSidebar"
                 @show-sidebar = "handleShowSidebar"
@@ -30,8 +34,13 @@
                     ></router-view>
             </transition>
             <app-bottom-navigator
+                v-if="themeStyle"
                 class="app-shell-footer">
             </app-bottom-navigator>
+            <article-bottom-navigator
+                v-else>
+
+            </article-bottom-navigator>
             <update-toast></update-toast>
         </v-app>
     </div>
@@ -40,9 +49,11 @@
 <script>
 import {mapState, mapActions} from 'vuex';
 import AppHeader from '@/components/AppHeader';
+import ArticleHeader from '@/components/ArticleHeader';
 import AppSidebar from '@/components/AppSidebar';
 import UpdateToast from '@/components/UpdateToast';
 import AppBottomNavigator from '@/components/AppBottomNavigator';
+import ArticleBottomNavigator from '@/components/ArticleBottomNavigator';
 
 export default {
     name: 'app',
@@ -50,7 +61,9 @@ export default {
         UpdateToast,
         AppHeader,
         AppSidebar,
-        AppBottomNavigator
+        AppBottomNavigator,
+        ArticleBottomNavigator,
+        ArticleHeader
     },
     computed: {
         ...mapState('pageTransition', {
@@ -64,6 +77,9 @@ export default {
 
         pageTransitionClass() {
             return `transition-${this.pageTransitionType}`;
+        },
+        themeStyle() {
+            return this.$route.name !== 'article';
         }
     },
     methods: {
@@ -163,4 +179,7 @@ export default {
 //     vertical-align -0.15em
 //     fill currentColor
 //     overflow hidden
+
+.app-shell-header
+    z-index 999
 </style>

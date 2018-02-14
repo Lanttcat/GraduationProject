@@ -4,8 +4,7 @@
             <v-btn
                 v-for="nav in btns"
                 :key="nav.name"
-                flat
-                :class="{'btn-nav-center':nav.center}">
+                flat>
                 <v-icon>{{nav.icon}}</v-icon>
             </v-btn>
         </v-bottom-nav>
@@ -15,7 +14,7 @@
 import { mapState } from 'vuex';
 
 export default {
-    name: 'ArticleBottomNavigator',
+    name: 'article-bottom-navigator',
     computed: {
         ...mapState('articleShell/articleBottom', [
             'btns'
