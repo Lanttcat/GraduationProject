@@ -71,12 +71,12 @@ export const state = () => {
                 center: false
             },
             {
-                name: 'user',
+                name: 'User',
                 icon: '#icon-nanshi',
                 text: '我的',
                 route: {
                     name: 'user',
-                    path: '/user'
+                    path: '/User'
                 },
                 center: false
             }

@@ -25,18 +25,19 @@
           <v-layout row wrap>
             <v-flex
                 xs4
-                v-for="n in 9"
-                :key="n"
+                v-for="item in boxList"
+                :key="item.id"
                 >
                 <v-card flat tile class="user-setting_item">
                     <v-flex full-height>
                         <v-btn
                             icon flat x-large
+                            @click="turnToSubPage(item.id, item.route)"
                             style="position: relativel;top:10px">
                             <v-icon class="app-header-icon">star</v-icon>
                         </v-btn>
                         <div>
-                            <v-btn flat small>我的收藏</v-btn>
+                            <v-btn flat small>{{ item.name }}</v-btn>
                         </div>
                     </v-flex>
                 </v-card>
@@ -47,7 +48,7 @@
 </template>
 
 <script>
-import { mapActions } from "vuex";
+import { mapActions, mapState } from "vuex";
 function setState(store) {
   store.dispatch("appShell/appHeader/setAppHeader", {
     show: false,
@@ -84,6 +85,11 @@ export default {
       ]
     };
   },
+  computed: {
+      ...mapState('appUser/appUserPage', [
+          'boxList'
+      ])
+  },
   metaInfo: {
     title: "Home",
     titleTemplate: "%s - Lavas",
@@ -106,6 +112,9 @@ export default {
       toLogin() {
           console.log(this.$router);
           this.$router.replace('Login');
+      },
+      turnToSubPage(id, route) {
+          this.$router.push(route);
       }
   }
 };
