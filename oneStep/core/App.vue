@@ -79,7 +79,11 @@ export default {
             return `transition-${this.pageTransitionType}`;
         },
         themeStyle() {
-            return this.$route.name !== 'article';
+            let notNeedHeader = ['article', 'setting'];
+            console.log(this.$route.name)
+            console.log(notNeedHeader.includes(this.$route.name));
+            return !notNeedHeader.includes(this.$route.name);
+            // return this.$route.name !== 'article';
         }
     },
     methods: {

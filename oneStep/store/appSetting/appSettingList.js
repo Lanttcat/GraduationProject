@@ -7,19 +7,32 @@ export let state = () => {
         settingList: [
             {
                 id: 1,
-                name: '个人信息'
+                name: '个人信息',
+                icon: 'sent',
+                route: {
+                    name: 'settingInfo',
+                    path: '/setting/userinfo'
+                }
             },
             {
                 id: 2,
-                name: '关于茶途'
+                name: '关于茶途',
+                icon: 'sent',
+                route:''
             },
             {
                 id: 3,
-                name: '关于茶途'
+                name: '关于茶途',
+                icon: 'sent',
+                route: {
+                    name: 'settingAbout',
+                    path: '/setting/appAbout'
+                }
             },
             {
                 id: 4,
-                name: '退出当前账号'
+                name: '退出当前账号',
+                icon: 'sent'
             }
         ]
     }

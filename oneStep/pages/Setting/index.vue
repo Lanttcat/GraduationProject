@@ -4,75 +4,54 @@
       <v-card>
         <v-toolbar color="indigo" dark>
             <v-toolbar-side-icon></v-toolbar-side-icon>
-            <v-toolbar-title>Manage</v-toolbar-title>
+            <v-toolbar-title>设置</v-toolbar-title>
             <v-spacer></v-spacer>
             <v-btn icon>
                 <v-icon>more_vert</v-icon>
             </v-btn>
         </v-toolbar>
-        <v-list class="indigo darken-2" dark>
-            <template v-for="(item, index) in items">
-                <v-list-tile v-if="item.action" :key="item.title" @click="settingItem">
-                <v-list-tile-action>
-                    <v-icon>{{ item.action }}</v-icon>
-                </v-list-tile-action>
-                <v-list-tile-content class="white--text">
-                    <v-list-tile-title>{{ item.title }}</v-list-tile-title>
-                </v-list-tile-content>
+        <v-list>
+                <v-list-tile 
+                    v-for="item in settingList" 
+                    :key="item.id"
+                    @click="turnToSeetingDetail(item.id, item.route)"
+                    class="setting-list">
+                    <!-- <span>{{item.icon}}</span> -->
+                    <v-list-tile-action>
+                        <v-icon>{{ item.icon }}</v-icon>
+                    </v-list-tile-action>
+                    <v-list-tile-content>
+                        <v-list-tile-title>{{ item.name }}</v-list-tile-title>
+                    </v-list-tile-content>
                 </v-list-tile>
-                <v-divider v-else-if="item.divider" :key="index"></v-divider>
-                <v-subheader v-else-if="item.header" :key="item.header" class="grey--text text--lighten-4">{{ item.header }}</v-subheader>
-            </template>
+                
         </v-list>
       </v-card>
     </v-flex>
   </v-layout>
 </template>
 <script>
-  export default {
-    data () {
-        return {
-            items: [
-                {
-                    action: 'move_to_inbox',
-                    title: 'Inbox'
-                },
-                {
-                    action: 'send',
-                    title: 'Sent'
-                },
-                {
-                    action: 'delete',
-                    title: 'Trash'
-                },
-                {
-                    action: 'report',
-                    title: 'Spam'
-                },
-                { divider: true },
-                { header: 'Labels' },
-                {
-                    action: 'label',
-                    title: 'Family'
-                },
-                {
-                    action: 'label',
-                    title: 'Friends'
-                },
-                {
-                    action: 'label',
-                    title: 'Work'
-                }
-            ]
-        }
+import { mapState } from 'vuex';
+export default {
+    name: 'setting',
+    computed: {
+        ...mapState('appSetting/appSettingList', [
+            'settingList'
+        ])
     },
     methods: {
-        settingItem: function () {
+        settingItem () {
             console.log('te');
+        },
+        turnToSeetingDetail(id, route) {
+            console.log(id);
+            // this.$router.push(route);
         }
     }
   }
 </script>
 <style lang="stylus" scoped>
-
+.setting-list
+    border-bottom 1px solid rgb(220, 220, 200);
+    padding 1rem
 </style>
