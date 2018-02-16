@@ -7,38 +7,31 @@ export const SET_APP_HEADER = 'SET_APP_HEADER';
 
 export const state = () => {
     return {
+        // 导航栏默认透明，尽量统一样式
         /**
          * 是否展示顶部导航栏
          *
          * @type {boolean}
          */
-        show: true,
-
-        /**
-         * 顶部导航栏是否不透明
-         *
-         * @type {boolean}
-         */
-        showSite: {
-            '/': false,
-            '/gonglue': true
-        },
+        isShowHeader: true,
 
         /**
          * 标题内容
          *
          * @type {string}
          */
-        title: 'Lavas',
+        title: '茶途',
 
-        /**
-         * logo图标
-         *
-         * @type {object}
-         */
-        logoIcon: {
-            src: '/static/img/icons/logo.png',
-            alt: 'logo'
+        // 是否显示搜索栏
+        isShowInputSearch: false,
+        isShowBtnSearch: false,
+        
+        // 左侧按钮 type: logo/icon src:名称或src
+        leftBtn: {
+            isShow: true,
+            isLog: true,
+            src: 'arrow_back',
+            alt: ''
         },
 
         /**

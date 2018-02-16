@@ -1,15 +1,6 @@
 <template>
     <div>
         <loacl-header></loacl-header>
-        <!-- <v-carousel>
-            <v-carousel-item
-                v-for="(item,i) in items"
-                v-bind:key="i"
-                v-bind:src="item.src"
-                transition="fade"
-                reverseTransition="fade">
-            </v-carousel-item>
-        </v-carousel> -->
         <v-container grid-list-md text-xs-center class="home-feed">
             <h2>景点推荐</h2>
             <v-layout row class="card-item">
@@ -74,17 +65,16 @@ import loaclHeader from '../components/LocalBanner'
 import {mapActions} from 'vuex';
 function setState(store) {
     store.dispatch('appShell/appHeader/setAppHeader', {
-        show: true,
-        title: 'Lavas',
-        showMenu: true,
-        showBack: false,
-        showLogo: false,
-        actions: [
-            {
-                icon: 'search',
-                route: '/search'
-            }
-        ]
+        isShowHeader: true,
+        title: '茶途',
+        isShowInputSearch: true,
+        isShowBtnSearch: true,
+        leftBtn: {
+            isShow: true,
+            isLogo: true,
+            src: '/static/img/icons/logo.png',
+            alt: 'logo'
+        }
     });
 }
 

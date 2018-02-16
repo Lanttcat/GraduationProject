@@ -84,21 +84,3 @@ export const state = () => {
     };
 };
 
-export const mutations = {
-    [SET_APP_BOTTOM](state, appBottonNav) {
-        state = Object.assign(state, appBottonNav);
-    }
-};
-
-export const actions = {
-
-    /**
-     * 设置顶部导航条
-     *
-     * @param {Function} commit commit
-     * @param {Object} appHeader appHeader
-     */
-    setAppHeader({commit}, appBottonNav) {
-        commit(SET_APP_BOTTOM, appBottonNav);
-    }
-};

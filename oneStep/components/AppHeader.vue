@@ -1,45 +1,40 @@
 <template>
     <transition
         name="slide-down">
-        <header class="app-header-wrapper" v-show="show">
-            <div class="app-header-left">
-                <!-- <v-btn
-                    icon
-                    v-if="showMenu"
-                    @click.native="handleClick('menu')">
-                    <v-icon color="grey darken-4" class="app-header-icon">menu</v-icon>
-                </v-btn> -->
-                <div @click="handleClick('logo')">
-                    <slot name="logo">
-                        <img v-if="logoIcon.src" :src="logoIcon.src" :alt="logoIcon.alt" class="app-header-logo">
+        <header class="app-header-wrapper" v-show="isShowHeader">
+            <div
+                v-if="leftBtn.isShow"
+                class="app-header-left">
+                <div
+                    v-if="leftBtn.isLogo"
+                    @click="handleClick('logo')">
+                    <slot
+                        name="logo">
+                        <img  :src="leftBtn.src" :alt="leftBtn.alt" class="app-header-logo">
                     </slot>
                 </div>
                 <v-btn
                     icon
-                    v-if="showBack"
+                    v-else
                     @click.native="handleClick('back')">
-                    <v-icon color="white" class="app-header-icon">arrow_back</v-icon>
+                    <v-icon color="white" class="app-header-icon">{{ leftBtn.src }}</v-icon>
                 </v-btn>
-                <div v-if="showLogo" @click="handleClick('logo')">
-                    <slot name="logo">
-                        <img v-if="logoIcon.src" :src="logoIcon.src" :alt="logoIcon.alt" class="app-header-icon">
-                    </slot>
-                </div>
             </div>
-            <div class="app-header-middle" v-cloak>
+            <div 
+                v-if="isShowInputSearch"
+                class="app-header-middle" v-cloak>
                 <slot name="title">
                     <input @click.native="handleClick('action', {actionIdx, route: action.route})" class="app-header-search" placeholder="搜索景点/攻略等" type="text">
                 </slot>
             </div>
-            <div class="app-header-right">
-                <slot name="actions"
-                    v-for="(action, actionIdx) in actions"
-                    :icon="action.icon"
-                    :route="action.route">
+            <div
+                v-if="isShowBtnSearch"
+                class="app-header-right">
+                <slot name="actions">
                     <v-btn
                         icon="icon"
-                        @click.native="handleClick('action', {actionIdx, route: action.route})">
-                        <v-icon color="grey darken-4" v-if="action.icon" class="app-header-icon">{{ action.icon }}</v-icon>
+                        @click.native="handleClick('action')">
+                        <v-icon color="grey darken-4" class="app-header-icon">search</v-icon>
                     </v-btn>
                 </slot>
             </div>
@@ -55,10 +50,10 @@ export default {
     name: 'appHeader',
     computed: {
         ...mapState('appShell/appHeader', [
-            'show',
-            'showMenu',
-            'showBack',
-            'showLogo',
+            'isShowHeader',
+            'leftBtn',
+            'isShowInputSearch',
+            'isShowBtnSearch',
             'logoIcon',
             'title',
             'actions'

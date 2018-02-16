@@ -1,3 +1,4 @@
+
 <template>
     <div>
         <!-- 未登录界面 -->
@@ -95,76 +96,66 @@
 <script>
 import { mapActions, mapState } from "vuex";
 function setState(store) {
-  store.dispatch("appShell/appHeader/setAppHeader", {
-    show: false,
-    title: "OneStep",
-    showMenu: false,
-    showBack: false,
-    showLogo: false,
-    actions: [
-      {
-        icon: "search",
-        route: "/search"
-      }
-    ]
-  });
+    store.dispatch("appShell/appHeader/setAppHeader", {
+        isShowHeader: false
+    });
 }
 
 export default {
-  name: "index",
-  data() {
-    return {
-      items: [
+    name: "index",
+    data() {
+        return {
+        items: [
+            {
+            src: "../static/img/testimg/1.JPG"
+            },
+            {
+            src: "../static/img/testimg/1.JPG"
+            },
+            {
+            src: "../static/img/testimg/1.JPG"
+            },
+            {
+            src: "../static/img/testimg/1.JPG"
+            }
+        ]
+        };
+    },
+    computed: {
+        ...mapState('appUser/appUserPage', [
+            'boxList'
+        ]),
+        ...mapState('userStatus/userStatu', [
+            'userInfo'
+        ])
+    },
+    metaInfo: {
+        title: "Home",
+        titleTemplate: "%s - Lavas",
+        meta: [
+        { name: "keywords", content: "lavas PWA" },
         {
-          src: "../static/img/testimg/1.JPG"
-        },
-        {
-          src: "../static/img/testimg/1.JPG"
-        },
-        {
-          src: "../static/img/testimg/1.JPG"
-        },
-        {
-          src: "../static/img/testimg/1.JPG"
+            name: "description",
+            content:
+            "基于 Vue 的 PWA 解决方案，帮助开发者快速搭建 PWA 应用，解决接入 PWA 的各种问题"
         }
-      ]
-    };
-  },
-  computed: {
-      ...mapState('appUser/appUserPage', [
-          'boxList'
-      ]),
-      ...mapState('userStatus/userStatu', [
-          'userInfo'
-      ])
-  },
-  metaInfo: {
-    title: "Home",
-    titleTemplate: "%s - Lavas",
-    meta: [
-      { name: "keywords", content: "lavas PWA" },
-      {
-        name: "description",
-        content:
-          "基于 Vue 的 PWA 解决方案，帮助开发者快速搭建 PWA 应用，解决接入 PWA 的各种问题"
-      }
-    ]
-  },
-  async asyncData({ store, route }) {
-    setState(store);
-  },
-  activated() {
-    setState(this.$store);
-  },
-  methods: {
-      toLogin() {
-          console.log(this.$router);
-          this.$router.replace('Login');
-      },
-      turnToSubPage(id, route) {
-          this.$router.push(route);
-      }
-  }
+        ]
+    },
+    async asyncData({ store, route }) {
+        setState(store);
+    },
+    activated() {
+        setState(this.$store);
+    },
+    methods: {
+        toLogin() {
+            console.log(this.$router);
+            this.$router.replace('Login');
+        },
+        turnToSubPage(id, route) {
+            this.$router.push(route);
+        }
+    }
 };
 </script>
 

@@ -32,12 +32,23 @@
 </template>
 <script>
 import { mapState } from 'vuex';
+function setState(store) {
+    store.dispatch('appShell/appHeader/setAppHeader', {
+        isShowHeader: false
+    });
+}
 export default {
     name: 'setting',
     computed: {
         ...mapState('appSetting/appSettingList', [
             'settingList'
         ])
+    },
+    async asyncData({store, route}) {
+        setState(store);
+    },
+    activated() {
+        setState(this.$store);
     },
     methods: {
         settingItem () {
