@@ -2,19 +2,20 @@
     <footer>
         <slot name="nav">
             <v-bottom-nav absolute :value="true" color="transparent">
-                <v-btn
+                <div
                     v-for="nav in navs"
                     :key="nav.name"
                     :value="nav.avtive"
                     flat
-                    @click.native="handleNavClick(nav.route, nav.name)"
+                    @click="handleNavClick(nav.route, nav.name)"
                     class="btn-nav"
                     :class="{'btn-nav-center':nav.center}">
-                    <span>{{ nav.text }}</span>
-                    <svg class="icon" aria-hidden="true">
-                        <use :xlink:href="nav.icon"></use>
+                    <!-- <embed src="../static/icon/site.svg" style="display:block;width:1.7rem;height:1.7rem" /> -->
+                    <svg class="iconAli" aria-hidden="true">
+                        <use class="iconAli" :xlink:href="nav.icon"></use>
                     </svg>
-                </v-btn>
+                    <span>{{ nav.text }}</span>                    
+                </div>
             </v-bottom-nav>
         </slot>
     </footer>
@@ -40,7 +41,7 @@ export default {
          */
         handleNavClick(route, name) {
             let eventData = {name};
-
+            console.log(route)
             // 发送给父组件，内部处理
             this.$emit('click-nav', eventData);
 
@@ -55,8 +56,16 @@ export default {
 }
 </script>
 <style lang="stylus" scoped>
+@import '~@/assets/stylus/variable'
 .btn-nav
-    min-width 70px
+    display flex
+    flex-direction column
+    justify-content center
+    width 20%
+    text-align center
+    embed
+        margin 0 auto
+
 .btn-nav-center
     // margin-top 8px
     // width 40px
@@ -67,8 +76,8 @@ export default {
 //     svg
 //         position relative
 //         top -8px
-.icon
-    width 1.7rem
+.iconAli
+    display block
     height 1.7rem
-    
+
 </style>

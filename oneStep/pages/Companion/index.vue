@@ -41,8 +41,7 @@ export default {
     data () {
         return {
             items: [
-                { header: 'Today' },
-                { avatar: '/static/doc-images/lists/1.jpg', title: 'Brunch this weekend?', subtitle: "<span class='text--primary'>Ali Connors</span> &mdash; I'll be in your neighborhood doing errands this weekend. Do you want to hang out?" },
+                { avatar: '/static/doc-images/lists/1.jpg', title: '张三', subtitle: "测试" },
                 { divider: true, inset: true },
                 { avatar: '/static/doc-images/lists/2.jpg', title: 'Summer BBQ <span class="grey--text text--lighten-1">4</span>', subtitle: "<span class='text--primary'>to Alex, Scott, Jennifer</span> &mdash; Wish I could come, but I'm out of town this weekend." },
                 { divider: true, inset: true },
@@ -64,6 +63,6 @@ export default {
 </script>
 <style lang="stylus" scoped>
 #app
-    .app-view-with-header
-        top 0
+    .app-view
+        top 52px
 </style>
