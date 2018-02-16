@@ -1,6 +1,10 @@
 <template>
     <div>
-        <v-container grid-list-md text-xs-center class="home-feed">
+        <!-- 未登录界面 -->
+        <v-container
+            v-if="userInfo.status === 0"
+            grid-list-md text-xs-center 
+            class="home-feed">
             <v-layout row class="card-item">
                 <v-flex xs12>
                     <div style="text-align: left">
@@ -21,6 +25,47 @@
                 </v-flex>
             </v-layout>
         </v-container>
+
+        <!-- 登录界面 -->
+        <v-container
+            v-if="userInfo.status === 1"
+            grid-list-md text-xs-center 
+            class="home-feed">
+            <v-layout row class="card-item">
+                <v-flex xs12>
+                    <v-card flat>
+                        <v-list two-line subheader>
+                            <v-list-tile>
+                                <v-list-tile-avatar>
+                                     <img src="../../static/img/avatar/logo.png">
+                                </v-list-tile-avatar>
+                                <v-list-tile-content>
+                                <v-list-tile-title>朱萧默说</v-list-tile-title>
+                                <v-list-tile-sub-title>我在这里</v-list-tile-sub-title>
+                                </v-list-tile-content>
+                                <v-list-tile-action>
+                                <v-btn icon ripple>
+                                    <v-icon color="grey lighten-1">info</v-icon>
+                                </v-btn>
+                                </v-list-tile-action>
+                            </v-list-tile>
+                        </v-list>
+                    </v-card>
+                    <v-card flat>
+                        <v-btn
+                            flat
+                            color="yellow"
+                            class="white--text">
+                            Upload
+                            <v-icon right dark>edit</v-icon>
+                        </v-btn>
+
+                    </v-card>
+                </v-flex>
+            </v-layout>
+        </v-container>
+
+        <!-- 公共界面 -->
         <v-container style="width:100%;padding:0;margin-top:1rem">
           <v-layout row wrap>
             <v-flex
@@ -88,6 +133,9 @@ export default {
   computed: {
       ...mapState('appUser/appUserPage', [
           'boxList'
+      ]),
+      ...mapState('userStatus/userStatu', [
+          'userInfo'
       ])
   },
   metaInfo: {

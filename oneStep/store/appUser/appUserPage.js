@@ -15,8 +15,17 @@ export let state = () => {
                 }
             },
             {
-                boxId: 1,
+                boxId: 2,
                 name: '设置',
+                icon: '',
+                route: {
+                    name: 'setting',
+                    path: '/setting'
+                }
+            },
+            {
+                boxId: 3,
+                name: '图集',
                 icon: '',
                 route: {
                     name: 'setting',
