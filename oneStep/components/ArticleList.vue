@@ -1,7 +1,7 @@
 <template>
     <v-layout row>
-        <v-flex xs12 sm6 offset-sm3>
-            <v-card>
+        <v-flex xs12  v-if="listArray">
+            <v-card flat>
                 <v-list>
                     <v-list-tile avatar v-for="item in listArray" :key="item.title">
                         <!-- <v-list-tile-action>
@@ -20,11 +20,19 @@
                 </v-list>
             </v-card>
         </v-flex>
+        <v-flex xs12 v-else style="padding-top:3rem">
+            <div class="headline text-xs-center">
+                暂无
+            </div>
+            <div class="text-xs-center">
+                快去 <v-btn style="display:inline;paddig:0" flat color="error">创建</v-btn>第一篇文章吧
+            </div>
+        </v-flex>
     </v-layout>
 </template>
 <script>
 export default {
-    name: 'articleList',
+    name: 'article-list',
     props: ['listArray']
 }
 </script>

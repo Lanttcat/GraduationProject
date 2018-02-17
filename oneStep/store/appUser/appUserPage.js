@@ -19,8 +19,8 @@ export let state = () => {
                 name: '我的攻略',
                 icon: '',
                 route: {
-                    name: 'celect',
-                    path: '/setting'
+                    name: 'userArticleList',
+                    path: '/user/articleList'
                 }
             },
             {
