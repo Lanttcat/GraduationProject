@@ -10,7 +10,6 @@ export let state = () => {
                 name: '我的收藏',
                 icon: '',
                 route: {
-                    name: 'celect',
                     path: '/setting'
                 }
             },
@@ -19,25 +18,38 @@ export let state = () => {
                 name: '我的攻略',
                 icon: '',
                 route: {
-                    name: 'userArticleList',
                     path: '/user/articleList'
                 }
             },
             {
                 boxId: 3,
-                name: '图集',
+                name: '陪玩',
                 icon: '',
                 route: {
-                    name: 'setting',
-                    path: '/setting'
+                    path: '/companion/Publish'
                 }
             },
             {
                 boxId: 4,
+                name: '图集',
+                icon: '',
+                route: {
+                    path: '/setting'
+                }
+            },
+            {
+                boxId: 5,
+                name: '志愿者',
+                icon: '',
+                route: {
+                    path: '/setting'
+                }
+            },
+            {
+                boxId: 6,
                 name: '设置',
                 icon: '',
                 route: {
-                    name: 'setting',
                     path: '/setting'
                 }
             }

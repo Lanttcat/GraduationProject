@@ -1,15 +1,9 @@
 <template>
   <v-layout row>
-    <v-flex xs12 sm6 offset-sm3>
+    
+    <v-flex xs12>
+        <sub-header :subHeaderData=settingListArray></sub-header>
       <v-card>
-        <v-toolbar color="indigo" dark>
-            <v-toolbar-side-icon></v-toolbar-side-icon>
-            <v-toolbar-title>设置</v-toolbar-title>
-            <v-spacer></v-spacer>
-            <v-btn icon>
-                <v-icon>more_vert</v-icon>
-            </v-btn>
-        </v-toolbar>
         <v-list>
                 <v-list-tile 
                     v-for="item in settingList" 
@@ -32,6 +26,7 @@
 </template>
 <script>
 import { mapState } from 'vuex';
+import subHeader from '@/components/SubHeader';
 function setState(store) {
     store.dispatch('appShell/appHeader/setAppHeader', {
         isShowHeader: false
@@ -39,6 +34,14 @@ function setState(store) {
 }
 export default {
     name: 'setting',
+    data() {
+        return {
+            settingListArray: {
+                title: '设置',
+                leftIcon: 'arrow_back'
+            }
+        }
+    },
     computed: {
         ...mapState('appSetting/appSettingList', [
             'settingList'
@@ -58,6 +61,9 @@ export default {
             console.log(id);
             // this.$router.push(route);
         }
+    },
+    components: {
+        'sub-header': subHeader
     }
   }
 </script>
