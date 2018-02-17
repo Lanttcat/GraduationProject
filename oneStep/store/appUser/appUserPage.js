@@ -16,7 +16,16 @@ export let state = () => {
             },
             {
                 boxId: 2,
-                name: '设置',
+                name: '我的攻略',
+                icon: '',
+                route: {
+                    name: 'celect',
+                    path: '/setting'
+                }
+            },
+            {
+                boxId: 3,
+                name: '图集',
                 icon: '',
                 route: {
                     name: 'setting',
@@ -24,8 +33,8 @@ export let state = () => {
                 }
             },
             {
-                boxId: 3,
-                name: '图集',
+                boxId: 4,
+                name: '设置',
                 icon: '',
                 route: {
                     name: 'setting',

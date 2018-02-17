@@ -1,7 +1,7 @@
 <template>
     <footer>
         <slot name="nav">
-            <v-bottom-nav absolute :value="true" color="transparent">
+            <v-bottom-nav absolute :value="true" color="white">
                 <div
                     v-for="nav in navs"
                     :key="nav.name"
