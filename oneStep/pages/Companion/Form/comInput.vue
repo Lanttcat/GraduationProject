@@ -12,7 +12,7 @@
                 :rules="nameRules"
                 required>
             </v-text-field>
-            <v-dialog v-model="dialog" persistent max-width="80%">
+            <v-dialog v-model="dialog" persistent fukk-width>
                 <v-btn color="primary" dark slot="activator">选择时间</v-btn>
                 <v-card>
                     <date-picker></date-picker>

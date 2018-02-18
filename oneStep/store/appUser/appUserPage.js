@@ -34,7 +34,7 @@ export let state = () => {
                 name: '图集',
                 icon: '',
                 route: {
-                    path: '/setting'
+                    path: '/albums'
                 }
             },
             {
@@ -42,7 +42,7 @@ export let state = () => {
                 name: '志愿者',
                 icon: '',
                 route: {
-                    path: '/setting'
+                    path: '/volunteer'
                 }
             },
             {

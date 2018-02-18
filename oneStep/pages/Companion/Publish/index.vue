@@ -1,27 +1,27 @@
 <template>
   <div>
-      <sub-header :subHeaderData=publishHeaderData></sub-header>
-    <v-tabs
-      v-model="active"
-      color="white"
-      fixed-tabs
-      slider-color="yellow">
-      <v-tab
-        v-for="item in navs"
-        :key="item"
-        ripple>
-        {{ item }}
-      </v-tab>
-      <v-tab-item
-        v-for="n in 3"
-        :key="n">
-        <v-card flat>
-          <v-card-text>
-              <com-input></com-input>
-          </v-card-text>
-        </v-card>
-      </v-tab-item>
-    </v-tabs>
+        <sub-header :subHeaderData=publishHeaderData></sub-header>
+        <v-tabs
+            v-model="active"
+            color="white"
+            fixed-tabs
+            slider-color="yellow">
+            <v-tab
+                v-for="item in navs"
+                :key="item"
+                ripple>
+                {{ item }}
+            </v-tab>
+            <v-tab-item
+                v-for="n in 3"
+                :key="n">
+                <v-card flat>
+                    <v-card-text>
+                        <com-input></com-input>
+                    </v-card-text>
+                </v-card>
+            </v-tab-item>
+        </v-tabs>
 
     <div class="text-xs-center mt-3">
       <v-btn @click.native="next">提交</v-btn>
