@@ -18,7 +18,7 @@ function createdMd5(code) {
     return result;
 }
 
-route.get('/data/userInfo', async (ctx) =>{
+route.get('/data/phoneCode', async (ctx) =>{
     console.log(ctx.query);
     let phone = ctx.query.phone;
     try {
@@ -29,7 +29,6 @@ route.get('/data/userInfo', async (ctx) =>{
         ctx.response.body = {
             data: data
         }
-        
     }
     catch (err) {
         console.log(err);

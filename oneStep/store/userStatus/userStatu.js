@@ -13,7 +13,15 @@ export let state = () => {
             uid: '',
             userName: '',
             userSite: '',
-            userIntro: ''
+            userIntro: '',
+            volunteer: {
+                volId: 111,
+                volTeam: {
+                    teamId: 88,
+                    teamName: '',
+                    teamMember: 222
+                }
+            }
         }
     }
 }
