@@ -8,11 +8,20 @@ const route = require('./server.js');
 const bodyParser = require('koa-bodyparser');
 const jwtErrorHandle = require('./middlewares/jwtErrorHandle.js');
 
+// 引入验证
+const jwt = require('koa-jwt');
+
+const secret = 'oneStep_secret'
+
 let app = new Koa();
 
 // 加入必要的插件
-app.use(bodyParser());
-app.use(route.routes());
-app.use(jwtErrorHandle);
+app.use(bodyParser())
+    .use(jwt({secret}).unless({
+        path: [/\/login/]
+    }))
+    .use(jwtErrorHandle)
+    .use(route.routes())
+    .use(router.allowedMethods());
 
 module.exports = app;
