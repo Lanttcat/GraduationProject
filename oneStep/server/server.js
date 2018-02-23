@@ -5,7 +5,7 @@
 const Router = require('koa-router');
 const crypto = require('crypto');
 
-let userInfo = require('./api/userInfo/index');
+let user = require('./api/user');
 // const jwt = require('jsonwebtoken');
 
 let route = new Router();
@@ -18,11 +18,11 @@ function createdMd5(code) {
     return result;
 }
 
-route.get('/data/phoneCode', async (ctx) =>{
-    console.log(ctx.query);
-    let phone = ctx.query.phone;
+route.get('/api/verificationCode', async (ctx) =>{
+    let {query} = ctx;
+    let phone = query.phone;
     try {
-        let res = await userInfo.sms('17865163230');
+        let res = await user.verificationCode('17865163230');
         let data = res ? createdMd5(createdMd5(res.toString()).toString()) : 0;
         // console.log(res);
         ctx.response.type = 'json';
@@ -36,10 +36,10 @@ route.get('/data/phoneCode', async (ctx) =>{
 });
 
 // 登录
-route.post('/data/login', async (ctx) => {
+route.post('/api/login', async (ctx) => {
     const { body } = ctx.request
     try {
-        const user = await User.findOne({ username: body.username });
+        const user = await user.login({ username: body.username });
         if (!user) {
             ctx.status = 401
             ctx.body = {
