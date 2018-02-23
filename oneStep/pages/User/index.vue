@@ -102,7 +102,7 @@ function setState(store) {
 }
 
 export default {
-    name: "index",
+    name: "user",
     data() {
         return {
         items: [

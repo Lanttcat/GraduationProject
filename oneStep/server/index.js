@@ -18,10 +18,10 @@ let app = new Koa();
 // 加入必要的插件
 app.use(bodyParser())
     .use(jwt({secret}).unless({
-        path: [/\/login/]
+        path: [/\/login/, /\//]
     }))
     .use(jwtErrorHandle)
-    .use(route.routes())
-    .use(router.allowedMethods());
+    .use(route.routes());
+    // .use(route.allowedMethods());
 
 module.exports = app;

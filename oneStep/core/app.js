@@ -5,7 +5,7 @@
 
 import Vue from 'vue';
 import Meta from 'vue-meta';
-import axios from './axios';
+import axios from 'axios';
 
 import {createRouter} from '@/.lavas/router';
 import {createStore} from '@/.lavas/store';
@@ -25,26 +25,6 @@ Vue.config.productionTip = false;
 
 export function createApp() {
     let router = createRouter();
-
-    //注册全局钩子用来拦截导航
-    router.beforeEach((to, from, next) => {
-        //获取store里面的token
-        let token = store.state.token;
-        //判断要去的路由有没有requiresAuth
-        if(to.meta.requiresAuth){
-            if(token){
-                next();
-            }else{
-                next({
-                    path: '/login',
-                    query: {redirect: to.fullPath}  // 将跳转的路由path作为参数，登录成功后跳转到该路由
-                });
-            }
-        }else{
-            next();//如果无需token,那么随它去吧
-        }
-    });
-
     let store = createStore();
     let App = Vue.extend({
         router,

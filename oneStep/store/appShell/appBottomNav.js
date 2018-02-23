@@ -36,10 +36,7 @@ export const state = () => {
                 // 路由
                 route: {
                     name: 'index',
-                    path: '/',
-                    meta: {
-                        requireAuth: true // 添加该字段，表示进入这个路由是需要登录的
-                    }
+                    path: '/'
                 },
                 center: false
             },
@@ -79,7 +76,7 @@ export const state = () => {
                 text: '我的',
                 route: {
                     name: 'user',
-                    path: '/User'
+                    path: '/user'
                 },
                 center: false
             }
