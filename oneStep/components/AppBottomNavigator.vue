@@ -41,12 +41,7 @@ export default {
          */
         handleNavClick(route, name) {
             let eventData = {name};
-            console.log(route.meta.requiresAuth);
-            route.meta = {
-                        requiresAuth: true
-                    }
-            console.log(route.meta.requiresAuth);
-                    
+
             // 发送给父组件，内部处理
             this.$emit('click-nav', eventData);
 

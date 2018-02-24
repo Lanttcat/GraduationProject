@@ -58,7 +58,15 @@ module.exports = {
         pageTransition: {
             type: 'slide',
             transitionClass: 'slide'
-        }
+        },
+        routes: [
+            {
+                pattern: /\/user/,
+                meta: {
+                    requiresAuth: true
+                }
+            }
+        ]
     },
     serviceWorker: {
         swSrc: path.join(__dirname, 'core/service-worker.js'),
