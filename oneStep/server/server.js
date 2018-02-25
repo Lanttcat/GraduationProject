@@ -18,9 +18,9 @@ function createdMd5(code) {
     return result;
 }
 
-route.get('/api/verificationCode', async (ctx) =>{
-    let {query} = ctx;
-    let phone = query.phone;
+route.get('/api/user', async (ctx) =>{
+    // let {query} = ctx;
+    let phone = ctx.query.userPhone;
     try {
         let res = await user.verificationCode('17865163230');
         let data = res ? createdMd5(createdMd5(res.toString()).toString()) : 0;
@@ -36,10 +36,11 @@ route.get('/api/verificationCode', async (ctx) =>{
 });
 
 // 登录
-route.post('/api/login', async (ctx) => {
+route.post('/api/user', async (ctx) => {
     const { body } = ctx.request
+    console.log(body);
     try {
-        const user = await user.login({ username: body.username });
+        const user = await user.login(body);
         if (!user) {
             ctx.status = 401
             ctx.body = {

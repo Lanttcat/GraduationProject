@@ -58,7 +58,7 @@ let user = {
             console.log(e);
         }
     },
-    login: async (usermail, pwd) => {
+    login: async (body) => {
         let sql = `select id, userstatus, usermail, username, teaminfo.teamid, teamname, teamsite, creattime, teamscorewen, teamscorewu, 
                 val_defend, val_shoot, val_un, val_pass, val_bt, wen, wu, member, teamslogan
                 from userinfo,teaminfo 

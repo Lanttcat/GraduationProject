@@ -17,7 +17,7 @@
                     <v-subheader>手机</v-subheader>
                 </v-flex>
                 <v-flex xs9>
-                    <input type="text" class="login-input" v-model="phoneNum" placeholder="手机登录更安全哟">
+                    <input type="text" class="login-input" v-model="loginInfo.userPhone" placeholder="手机登录更安全哟">
                 </v-flex>
             </v-layout>
             <v-layout row class="login-form">
@@ -25,74 +25,78 @@
                     <v-subheader>密码</v-subheader>
                 </v-flex>
                 <v-flex xs9>
-                    <input type="text" class="login-input" v-model="phoneNum" placeholder="">
+                    <input type="password" class="login-input" v-model="loginInfo.userPassword" placeholder="">
                 </v-flex>
             </v-layout>
             <v-layout row>
-                <v-flex xs12>
-                    <p style="text-align:right" class="text-lg-right">忘记密码</p>
+                <v-flex xs5 offset-xs1>
+                    <v-alert
+                        outline
+                        color="error"
+                        class="alert-error"
+                        :value="alertControl.status"
+                        transition="scale-transition">
+                        提示：{{ alertControl.text}}
+                    </v-alert>
+                </v-flex>
+                <v-flex xs5>
+                    <button style="text-align:right" class="text-lg-right">忘记密码</button>
                 </v-flex>
             </v-layout>
-            <v-layout>
-                <v-alert
-                    type="success"
-                    :value="alertww"
-                    transition="scale-transition">
-                    手机号错误
-                </v-alert>
-            </v-layout>
-            <v-layout>
+            <v-layout row class="login-form">
                 <v-flex xs12>
-                    <button class="login-btn">提交</button>
+                    <button class="login-btn" @click="userLoginControl">登录</button>
                 </v-flex>
             </v-layout>
         </v-tab-item>
         <!-- 注册tab -->
         <v-tab-item>
-            <v-card flat style="padding-top:1rem">
-                <v-layout row class="login-form">
-                    <v-flex xs3>
-                        <v-subheader>手机</v-subheader>
-                    </v-flex>
-                    <v-flex xs9>
-                        <input type="text" class="login-input" v-model="phoneNum" placeholder="手机号">
-                    </v-flex>
-                </v-layout>
-                <v-layout row class="login-form">
-                    <v-flex xs3>
-                        <v-subheader>验证码</v-subheader>
-                    </v-flex>
-                    <v-flex xs5>
-                        <input type="text" class="login-input" placeholder="验证码">
-                    </v-flex>
-                    <v-flex xs4>
-                        <div>
-                            <button @click="getCode" class="login-btn_code">提交</button>
-                        </div>
-                    </v-flex>
-                </v-layout>
-                <v-layout row class="login-form">
-                    <v-flex xs3>
-                        <v-subheader>密码</v-subheader>
-                    </v-flex>
-                    <v-flex xs9>
-                        <input type="text" class="login-input" v-model="phoneNum" placeholder="手机号">
-                    </v-flex>
-                </v-layout>
-                <v-layout>
+            <v-layout row class="login-form">
+                <v-flex xs3>
+                    <v-subheader>手机</v-subheader>
+                </v-flex>
+                <v-flex xs9>
+                    <input type="text" class="login-input" v-model="registerInfo.userPhone" placeholder="手机号">
+                </v-flex>
+            </v-layout>
+            <v-layout row class="login-form">
+                <v-flex xs3>
+                    <v-subheader>验证码</v-subheader>
+                </v-flex>
+                <v-flex xs5>
+                    <input type="text" class="login-input" v-model="registerInfo.verifyCode" placeholder="验证码">
+                </v-flex>
+                <v-flex xs4>
+                    <div>
+                        <button @click="getVerifyCode" class="login-btn_code">提交</button>
+                    </div>
+                </v-flex>
+            </v-layout>
+            <v-layout row class="login-form">
+                <v-flex xs3>
+                    <v-subheader>密码</v-subheader>
+                </v-flex>
+                <v-flex xs9>
+                    <input type="text" class="login-input" v-model="registerInfo.userPassword" placeholder="手机号">
+                </v-flex>
+            </v-layout>
+            <v-layout row>
+                <v-flex xs5 offset-xs1>
                     <v-alert
-                        type="success"
-                        :value="alertww"
+                        outline
+                        color="error"
+                        class="alert-error"
+                        :value="alertControl.status"
                         transition="scale-transition">
-                        手机号错误
+                        提示：{{ alertControl.text}}
                     </v-alert>
-                </v-layout>
-                <v-layout>
-                    <v-flex xs12>
-                        <button class="login-btn">提交</button>
-                    </v-flex>
-                </v-layout>
-            </v-card>
+                </v-flex>
+            </v-layout>
+            <v-layout row class="login-form">
+                <v-flex xs12>
+                    <button class="login-btn">提交</button>
+                </v-flex>
+            </v-layout>
         </v-tab-item>
     </v-tabs>
     <!-- <v-container fluid>
@@ -113,12 +117,22 @@ export default {
     data() {
         return {
             navs: ['登录', '注册'],
-            alertww: true,
-            phoneNum: "",
-            tipInfo: ["号码格式错误", "验证码错误"],
-            active: null,
-            text:
-                "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
+            loginInfo: {
+                userPhone: null,
+                userPassword: null
+            },
+            registerInfo: {
+                userPhone: null,
+                userCodePhone: null,
+                userPassword: null,
+                varifyCode: null
+            },
+            alertControl: {
+                status: false,
+                text: ''
+            },
+            errprTipInfo: ['号码不存在', '密码错误', '号码格式错误', '验证码错误', '密码不能为空'],
+            active: null
         };
     },
     async asyncData({ store, route }) {
@@ -131,22 +145,70 @@ export default {
         next() {
             const active = parseInt(this.active);
             this.active = (active < 2 ? active + 1 : 0).toString();
+            this.alertStatusChange(false);
         },
-        verifyPhone(e) {
-            if (!/^1[34578]\d{9}$/.test(this.phoneNum)) {
-                this.alertww = true;
-                console.log(e);
-            } else {
-                // 发送
+        alertStatusChange(status, text) {
+            this.alertControl.status = status;
+            this.alertControl.text = text;
+        },
+        verifyPhone(value) {
+            return /^1[34578]\d{9}$/.test(value);
+        },
+        getVerifyCode() {
+            // 获取验证码
+            // 1. 验证手机号
+            if (!this.verifyPhone(this.registerInfo.userPhone)) {
+                this.alertStatusChange(true, this.errprTipInfo[2]);
+                return;
             }
-        },
-        getCode() {
-            console.log(this.phoneNum);
-            this.$http.get("/data/userInfo", {
-                phone: this.phoneNum
+            // 绑定手机号，防止用户获取验证码后，修改手机号
+            this.registerInfo.userCodePhone = this.registerInfo.userPhone;
+            this.$http.get("/api/user", {
+                userPhone: this.registerInfo.userPhone
             }).then(
-                function (res) {
-                    console.log(res);
+                function ({data}) {
+                    console.log(data);
+                },
+                function (err) {
+                    console.log(err)
+                }
+            );
+        },
+        userLoginControl() {
+            if (!this.verifyPhone(this.loginInfo.userPhone)) {
+                this.alertStatusChange(true, this.errprTipInfo[2]);
+                return;
+            }
+            if (!this.loginInfo.userPassword) {
+                this.alertStatusChange(true, this.errprTipInfo[4]);
+                return;
+            }
+            this.$http.post("/api/user", {
+                userPhone: this.loginInfo.userPhone,
+                userPassword: this.loginInfo.userPassword
+            }).then(
+                function ({data}) {
+                    // 将数据同步到store
+                    console.log(data);
+                },
+                function (err) {
+                    console.log(err)
+                }
+            );
+        },
+        userRegisterControl() {
+            // 检查验证码
+            if (!this.registerInfo.userPassword) {
+                this.alertStatusChange(true, this.errprTipInfo[4]);
+                return;
+            }
+            this.$http.post("/api/user", {
+                userPhone: this.registerInfo.userCodePhone,
+                userPassword: this.registerInfo.userPassword
+            }).then(
+                function ({data}) {
+                    // 将数据同步到store
+                    console.log(data);
                 },
                 function (err) {
                     console.log(err)
@@ -170,6 +232,10 @@ export default {
     outline: none;
 }
 
+.alert.alert--outline
+    border none!important
+    padding 0
+
 .login-btn_code {
     padding: 0.8rem;
     width: 100%;
@@ -177,7 +243,8 @@ export default {
     background: $theme;
     text-align: center;
 }
-
+.text-lg-right
+    padding 4px
 .login-btn {
     width: 100%;
     padding: 1rem;
