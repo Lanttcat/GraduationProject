@@ -42,6 +42,7 @@
 
             </article-bottom-navigator>
             <update-toast></update-toast>
+            <msg-tip></msg-tip>
         </v-app>
     </div>
 </template>
@@ -49,6 +50,7 @@
 <script>
 import {mapState, mapActions} from 'vuex';
 import AppHeader from '@/components/AppHeader';
+import MsgTip from '@/components/MsgTip';
 import ArticleHeader from '@/components/ArticleHeader';
 import AppSidebar from '@/components/AppSidebar';
 import UpdateToast from '@/components/UpdateToast';
@@ -63,7 +65,8 @@ export default {
         AppSidebar,
         AppBottomNavigator,
         ArticleBottomNavigator,
-        ArticleHeader
+        ArticleHeader,
+        MsgTip
     },
     computed: {
         ...mapState('pageTransition', {

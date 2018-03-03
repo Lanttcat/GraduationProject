@@ -14,9 +14,9 @@
 </template>
 
 <script>
+import { mapState } from 'vuex';
 export default {
-    name: 'msgTip',
-    props: ['msgText'],
+    name: 'msg-tip',
     data () {
         return {
             snackbar: false,
@@ -25,6 +25,17 @@ export default {
             mode: '',
             timeout: 3000
         }
+    },
+    watch: {
+        msgSwitch() {
+            this.snackbar = this.msgSwitch;
+        }
+    },
+    computed: {
+        ...mapState('global', [
+            'msgSwitch',
+            'msgText'
+        ])
     }
 }
 </script>
