@@ -15,16 +15,16 @@ const dbConfig = {
         host: '127.0.0.1',
         port: '3306',
         user: 'root',
-        password: '12356789',
-        database: 'onestep'
+        password: '19951024lyxA',
+        database: 'onestep_base'
     },
     dev: {
         connectionLimit : 10,
-        host: '127.0.0.1',
+        host: '123.207.150.130',
         port: '3306',
         user: 'root',
-        password: '12356789',
-        database: 'onestep'
+        password: '19951024lyxA',
+        database: 'onestep_base'
     }
 };
 
