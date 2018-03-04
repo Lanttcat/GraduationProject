@@ -12,7 +12,7 @@ const isProduct = process.env.NODE_ENV === 'production';
 const dbConfig = {
     prod: {
         connectionLimit : 10,
-        host: '127.0.0.1',
+        host: '123.207.150.130',
         port: '3306',
         user: 'root',
         password: '19951024lyxA',
@@ -57,5 +57,24 @@ function init() {
     return pool;
 }
 
-module.exports = init;
+function GetMysqlConnectPool() {
+    // 初始化数据库
+    let pool = init();
+
+    // 数据库连接错误处理
+    if (!pool) {
+        // 这里抛出错误
+        let logger = new Log();
+        logger.log({
+            site: __filename,
+            text: '数据库连接错误'
+        });
+        return;
+    }
+    
+    return pool;
+};
+
+exports.init = init;
+exports.GetMysqlConnectPool = GetMysqlConnectPool;
 

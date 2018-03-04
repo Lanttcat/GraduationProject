@@ -1,8 +1,7 @@
-let initDatabase = require('./connectDatabase.js');
+let GetMysqlConnectPool = require('./connectDatabase.js').GetMysqlConnectPool;
 let Log = require('../log/index');
 
-let mysqlConnectPool = {};
-
+let pool = GetMysqlConnectPool();
 /**
  * 数据库操作
  *
@@ -15,6 +14,7 @@ function sqlQuery(sql) {
     return new Promise((resolve, reject) => {
         pool.query(sql, function (error, results, field) {
             if (error) {
+                console.log(error);
                 reject();
             }
             else {
@@ -24,56 +24,38 @@ function sqlQuery(sql) {
     });
 }
 
-(() => {
-    // 初始化数据库
-    var poll = initDatabase();
-
-    // 数据库连接错误处理
-    if (!poll) {
-        // 这里抛出错误
-        let logger = new Log();
-        logger.log({
-            site: __filename,
-            text: '数据库连接错误'
-        });
-        return;
-    }
-
-    // 初始化数据库连接池 避免重复建立
-    mysqlConnectPool = mysqlConnectPool || poll;
-})();
 
 //  设计初衷：每个路由都可以基于基础类进行各自数据库的封装
-class queryBase {
-    constructor(table) {
-        this.table = table;
-    }
+// class queryBase {
+//     constructor(table) {
+//         this.table = table;
+//     }
 
-    _addTable (sql) {
-        return sql + ' ' + this.table;
-    }
-    // 插入
-    insert(data) {
+//     _addTable (sql) {
+//         return sql + ' ' + this.table;
+//     }
+//     // 插入
+//     insert(data) {
 
-    }
+//     }
 
-    // 查找
-    find (data) {
-        data = {
-            returnColumn: ['dd'],
-            conditionQuery: {
-                symbol: 'where',
-                cloName: 'dd',
-                cloValue: 'ddd'
-            }
-        }
-        // {column: value}
-        let sql = 'select * from'
-    }
+//     // 查找
+//     find (data) {
+//         data = {
+//             returnColumn: ['dd'],
+//             conditionQuery: {
+//                 symbol: 'where',
+//                 cloName: 'dd',
+//                 cloValue: 'ddd'
+//             }
+//         }
+//         // {column: value}
+//         let sql = 'select * from'
+//     }
 
-    // 自定义sql语句
-    customQuery() {
+//     // 自定义sql语句
+//     customQuery() {
 
-    }
-}
+//     }
+// }
 module.exports = sqlQuery;
