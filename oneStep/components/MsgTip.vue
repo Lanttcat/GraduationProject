@@ -14,7 +14,7 @@
 </template>
 
 <script>
-import { mapState } from 'vuex';
+import { mapState, mapMutations } from 'vuex';
 export default {
     name: 'msg-tip',
     data () {
@@ -26,9 +26,17 @@ export default {
             timeout: 3000
         }
     },
+    methods: {
+        ...mapMutations('global', {
+            setMsgTip: 'SETMSGTIP'
+        }),
+    },
     watch: {
         msgSwitch() {
             this.snackbar = this.msgSwitch;
+            setTimeout(() => {
+                this.setMsgTip({msgSwitch: false, msgText: ''});
+            }, this.timeout);
         }
     },
     computed: {
