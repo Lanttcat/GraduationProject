@@ -64,7 +64,7 @@
                     <v-subheader>验证码</v-subheader>
                 </v-flex>
                 <v-flex xs5>
-                    <input type="text" class="login-input" v-model="registerInfo.verifyCode" placeholder="验证码">
+                    <input type="text" class="login-input" v-model="registerInfo.varifyCode" placeholder="验证码">
                 </v-flex>
                 <v-flex xs4>
                     <div>
@@ -77,7 +77,7 @@
                     <v-subheader>密码</v-subheader>
                 </v-flex>
                 <v-flex xs9>
-                    <input type="text" class="login-input" v-model="registerInfo.userPassword" placeholder="手机号">
+                    <input type="text" class="login-input" v-model="registerInfo.userPassword" placeholder="password">
                 </v-flex>
             </v-layout>
             <v-layout row>
@@ -94,7 +94,7 @@
             </v-layout>
             <v-layout row class="login-form">
                 <v-flex xs12>
-                    <button class="login-btn">提交</button>
+                    <button class="login-btn" @click="userRegisterControl">注册</button>
                 </v-flex>
             </v-layout>
         </v-tab-item>
@@ -105,7 +105,7 @@
 </template>
 <script>
 import storage from '../../lib/storage.js';
-import {mapState} from 'vuex';
+import {mapState, mapMutations} from 'vuex';
 
 function setState(store) {
     store.dispatch("appShell/appHeader/setAppHeader", {
@@ -131,6 +131,7 @@ export default {
                 status: false,
                 text: ''
             },
+            code: 0,
             errprTipInfo: ['号码不存在', '密码错误', '号码格式错误', '验证码错误', '密码不能为空'],
             active: null
         };
@@ -142,6 +143,9 @@ export default {
         setState(this.$store);
     },
     methods: {
+        ...mapMutations('global', {
+            setMsgTip: 'SETMSGTIP'
+        }),
         next() {
             const active = parseInt(this.active);
             this.active = (active < 2 ? active + 1 : 0).toString();
@@ -164,13 +168,20 @@ export default {
             // 绑定手机号，防止用户获取验证码后，修改手机号
             this.registerInfo.userCodePhone = this.registerInfo.userPhone;
             this.$http.get("/api/user", {
-                userPhone: this.registerInfo.userPhone
+                params: {
+                    userPhone: this.registerInfo.userPhone
+                }
             }).then(
-                function ({data}) {
+                ({data}) => {
                     console.log(data);
-                },
-                function (err) {
-                    console.log(err)
+                    if( parseInt(data.status) === 1 ) {
+                        this.code = data.data;
+                        console.log(data);
+                        this.setMsgTip({msgSwitch: true, msgText: '验证码发送成功'});
+                    }
+                    else {
+                        this.setMsgTip({msgSwitch: true, msgText: '获取验证码失败，请稍后再试'});
+                    }
                 }
             );
         },
@@ -183,22 +194,32 @@ export default {
                 this.alertStatusChange(true, this.errprTipInfo[4]);
                 return;
             }
-            this.$http.post("/api/user", {
+            this.$http.put("/api/user", {
                 userPhone: this.loginInfo.userPhone,
                 userPassword: this.loginInfo.userPassword
-            }).then(
-                function ({data}) {
-                    // 将数据同步到store
+            }).then(({data}) => {
                     console.log(data);
-                },
-                function (err) {
-                    console.log(err)
-                }
-            );
+                    if (data.status) {
+                        console.log('dddddd')
+                        // 将消息同步到store
+                        this.setMsgTip({msgSwitch: true, msgText: 'dcdcdcdcd'});
+                    }
+                    else {
+                        this.setMsgTip({msgSwitch: true, msgText: data.message});
+                    }
+                }).catch((e) => {
+                    console.log(e);
+                    this.setMsgTip({msgSwitch: true, msgText: '服务器错误'});
+                })
         },
         userRegisterControl() {
             // 检查验证码
+            if (parseInt(this.registerInfo.varifyCode) != parseInt(this.code)) {
+                this.setMsgTip({msgSwitch: true, msgText: '验证码错误'});
+                return;
+            }
             if (!this.registerInfo.userPassword) {
+                
                 this.alertStatusChange(true, this.errprTipInfo[4]);
                 return;
             }
@@ -207,11 +228,19 @@ export default {
                 userPassword: this.registerInfo.userPassword
             }).then(
                 function ({data}) {
-                    // 将数据同步到store
                     console.log(data);
+                    if (data.status) {
+                        this.setMsgTip({msgSwitch: true, msgText: '注册成功，请重新登录'});
+                        // 切换到登录界面
+                        this.active = 0;
+                    }
+                    else {
+                        this.setMsgTip({msgSwitch: true, msgText: '注册失败，请稍后再试'});
+                    }
+                    // 将数据同步到store
                 },
                 function (err) {
-                    console.log(err)
+                    this.setMsgTip({msgSwitch: true, msgText: '注册失败，请稍后再试'});
                 }
             );
         }

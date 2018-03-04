@@ -3,6 +3,36 @@
         <loacl-header></loacl-header>
         <v-container grid-list-md text-xs-center class="home-feed">
             <h2>景点推荐</h2>
+            <!-- 一般三到四个 -->
+            <v-layout
+                v-for="item in ssList"
+                :key="item.ssId"
+                row
+                class="card-item">
+                <v-flex xs6>
+                  <div style="text-align: left">
+                    <div class="headline" @click="TurnToArticle('11')">{{ item.ssTitle }}</div>
+                    <div class="headline-sub">{{ item.ssSubTitle }}</div>
+                    <v-chip
+                        v-for="tag in item.tag"
+                        :key="tag.id"
+                        outline
+                        class="item-tag"
+                        color="red">
+                        {{tag}}
+                    </v-chip>
+                  </div>
+                </v-flex>
+                <v-flex x6>
+                    <img
+                      src="../static/img/testimg/1.jpg">
+                    <div>
+                        <span>{{ item.browserNumber }}</span>
+                        <span>{{ item.zanNumber }}</span>
+                    </div>
+                </v-flex>
+            </v-layout>
+            <h2>热门攻略</h2>
             <v-layout row class="card-item">
                 <v-flex xs7>
                   <div style="text-align: left">
@@ -16,20 +46,12 @@
                         <!-- <v-icon left>label</v-icon> -->
                         标签
                     </v-chip>
-                    <!-- <v-chip
-                        text-color='white'
-                        small>
-                        <v-avatar>
-                            <v-icon>account_circle</v-icon>
-                        </v-avatar>
-                        去处
-                    </v-chip> -->
                   </div>
                 </v-flex>
                 <v-flex xs5>
                     <v-card-media
                       src="../static/img/testimg/1.JPG"
-                      height="125px"
+                      height="8rem"
                       contain
                     ></v-card-media>
                     <div>
@@ -38,6 +60,7 @@
                     </div>
                 </v-flex>
             </v-layout>
+            <h2>最新发布</h2>
             <v-layout row class="card-item">
                 <v-flex xs7>
                   <div>
@@ -82,6 +105,36 @@ export default {
     name: 'index',
     data () {
         return {
+            ssList: [
+                {
+                    ssId: 1223,
+                    ssTitle: '测试cadlajdjll名字1',
+                    ssSubTitle: '测试的副标题或者作者名',
+                    tag: ['推荐', '景点'],
+                    ssImg: '../static/img/testimg/1.JPG',
+                    browserNumber: '1111',
+                    zanNumber: '222'
+                },
+                {
+                    ssId: 126623,
+                    ssTitle: '测试名字2',
+                    ssSubTitle: '测试的副标题',
+                    tag: ['推荐', '景点'],
+                    ssImg: '../static/img/testimg/1.JPG',
+                    browserNumber: '1111',
+                    zanNumber: '222'
+                },
+                {
+                    ssId: 125523,
+                    ssTitle: '测试名字3',
+                    ssSubTitle: '测试的副标题',
+                    tag: ['推荐', '景点'],
+                    ssImg: '../static/img/testimg/1.JPG',
+                    browserNumber: '1111',
+                    zanNumber: '222'
+                }
+
+            ],
             items: [
                 {
                     src: '../static/img/testimg/1.JPG'
@@ -145,9 +198,22 @@ export default {
     background-color #fff
 
     .card-item
-        padding 8px 0px
+        padding 4px 0px 8px 0px
+        height 11rem
         border-bottom 1px solid $colorBorder
         box-shadow none
+
+        .headline
+            height 5rem
+
+        .headline-sub
+            height 3rem
+
+        .item-tag
+            height 1.5rem
+
+        img 
+            height 8rem
 .carousel
     height 200px
 

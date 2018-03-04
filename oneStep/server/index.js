@@ -24,4 +24,7 @@ app.use(bodyParser())
     .use(route.routes());
     // .use(route.allowedMethods());
 
+if (module.hot) {
+    module.hot.accept();
+}
 module.exports = app;

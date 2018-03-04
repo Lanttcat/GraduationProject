@@ -25,15 +25,15 @@ function createCode() {
 }
 
 let user = {
-    registration: async (username, password) => {
-        let sql = `INSERT INTO zuizuo_db.userinfo (username, userstatus, usermail, password) VALUES ('${name}', '1', '${mail}', '${pwd}');`;
+    registration: async (body) => {
+        let sql = `INSERT INTO userbaseinfo (uname, uphone, upassword) VALUES ('${body.userPhone}', '${body.userPhone}', '${body.hashPassword}')`;
         try {
             let res = await query(sql);
             return res;
         }
         catch (e) {
             console.log(e);
-            return '002';
+            return false;
         }
     },
     verificationCode: async (phoneNum) => {
@@ -59,17 +59,16 @@ let user = {
         }
     },
     login: async (body) => {
-        let sql = `select id, userstatus, usermail, username, teaminfo.teamid, teamname, teamsite, creattime, teamscorewen, teamscorewu, 
-                val_defend, val_shoot, val_un, val_pass, val_bt, wen, wu, member, teamslogan
-                from userinfo,teaminfo 
-                where usermail = '${usermail}' and password = '${pwd}' and userinfo.teamid = teaminfo.teamid;`;
+        let sql = `select uid, uphone, uname, uage, upassword 
+                from userbaseinfo 
+                where uphone = '${body.userPhone}';`;
         try {
             let res = await query(sql);
             return res;
         }
         catch (e) {
             console.log(e);
-            return '002';
+            return false;
         }
     }
 }
