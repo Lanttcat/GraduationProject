@@ -9,11 +9,12 @@ export let state = () => {
          */
         userInfo: {
             status: 1,
-            phone: 1111,
+            uphone: 1111,
             uid: '',
-            userName: '',
-            userSite: '',
-            userIntro: '',
+            uname: '',
+            uage: null,
+            uSite: '',
+            uIntro: '',
             volunteer: {
                 volId: 111,
                 volTeam: {
@@ -27,8 +28,8 @@ export let state = () => {
 }
 
 export const mutations = {
-    syncUserInfo(state, appBottonNav) {
-        state = Object.assign(state, appBottonNav);
+    syncUserInfo(state, userData) {
+        Object.assign(state.userInfo, userData);
     }
 };
 
@@ -40,7 +41,8 @@ export const actions = {
      * @param {Function} commit commit
      * @param {Object} appHeader appHeader
      */
-    setUserInfo({commit}, appBottonNav) {
-        commit('syncUserInfo', appBottonNav);
+    setUserInfo({commit}, userData) {
+        // console.log(userData);
+        commit('syncUserInfo', userData);
     }
 };

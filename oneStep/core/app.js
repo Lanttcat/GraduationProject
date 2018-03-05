@@ -11,6 +11,7 @@ import {createRouter} from '@/.lavas/router';
 import {createStore} from '@/.lavas/store';
 import AppComponent from './App.vue';
 import Vuetify from 'vuetify';
+import storage from '../lib/storage'
 import {ActionMonitor} from '../plugin/ActionMonitor';
 
 Vue.use(Meta);
@@ -27,18 +28,15 @@ export function createApp() {
     let router = createRouter();
 
     router.beforeEach((to, from, next) => {
-            //注册全局钩子用来拦截导航
+        //注册全局钩子用来拦截导航
         //获取store里面的token
-        // let token = store.state.token;
-        let token = null;
-        console.log(to.matched.some(record => record.meta.requiresAuth));
+        let token =  storage.getItem('oneStep_token');
         //判断要去的路由有没有requiresAuth
         if (to.meta.requiresAuth){
             if (token){
                 next();
             }
             else {
-                console.log('测试3')
                 next({
                     path: '/login',
                     query: {redirect: to.fullPath}  // 将跳转的路由path作为参数，登录成功后跳转到该路由

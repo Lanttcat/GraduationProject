@@ -59,7 +59,7 @@ let user = {
         }
     },
     login: async (body) => {
-        let sql = `select uid, uphone, uname, uage, upassword 
+        let sql = `select uid, uphone, uname, uage, upassword, uIntro, uSite, uavatar 
                 from userbaseinfo 
                 where uphone = '${body.userPhone}';`;
         try {

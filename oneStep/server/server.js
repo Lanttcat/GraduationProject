@@ -67,7 +67,7 @@ route.post('/api/user', async (ctx) => {
 
 // 登录
 route.put('/api/user', async (ctx) => {
-    const { body } = ctx.request
+    const { body } = ctx.request;
     console.log(body);
     try {
         const userInfo = await user.login(body);
@@ -80,9 +80,9 @@ route.put('/api/user', async (ctx) => {
             return;
         }
         // 匹配密码是否相等
-        console.log((body.usrPassword, userInfo[0].upassword));
         let flag = await oneBcrypt.comparePassword(body.userPassword, userInfo[0].upassword);
         if (flag) {
+            delete userInfo[0].upassword;
             ctx.status = 200
             ctx.body = {
                 status: true,

@@ -10,7 +10,7 @@ let storage = {
         winStorage.setItem(key, value);
     },
     getItem(key) {
-        winStorage.getItem(key);
+        return winStorage.getItem(key);
     },
     removeItem(key) {
         winStorage.removeItem(key);

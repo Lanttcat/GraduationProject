@@ -41,8 +41,8 @@
                                      <img src="../../static/img/avatar/logo.png">
                                 </v-list-tile-avatar>
                                 <v-list-tile-content>
-                                <v-list-tile-title>朱萧默说</v-list-tile-title>
-                                <v-list-tile-sub-title>我在这里</v-list-tile-sub-title>
+                                <v-list-tile-title>{{ userInfo.uname }}</v-list-tile-title>
+                                <v-list-tile-sub-title>{{ userInfo.uIntro}}</v-list-tile-sub-title>
                                 </v-list-tile-content>
                                 <v-list-tile-action>
                                 <v-btn icon ripple>
@@ -137,7 +137,7 @@ export default {
         {
             name: "description",
             content:
-            "基于 Vue 的 PWA 解决方案，帮助开发者快速搭建 PWA 应用，解决接入 PWA 的各种问题"
+            "旅行攻略，应有尽有"
         }
         ]
     },

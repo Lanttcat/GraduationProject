@@ -105,7 +105,7 @@
 </template>
 <script>
 import storage from '../../lib/storage.js';
-import {mapState, mapMutations} from 'vuex';
+import {mapState, mapMutations, mapActions} from 'vuex';
 
 function setState(store) {
     store.dispatch("appShell/appHeader/setAppHeader", {
@@ -146,6 +146,9 @@ export default {
         ...mapMutations('global', {
             setMsgTip: 'SETMSGTIP'
         }),
+        ...mapActions('userStatus/userStatu', [
+            'setUserInfo'
+        ]),
         next() {
             const active = parseInt(this.active);
             this.active = (active < 2 ? active + 1 : 0).toString();
@@ -200,9 +203,15 @@ export default {
             }).then(({data}) => {
                     console.log(data);
                     if (data.status) {
-                        console.log('dddddd')
+                        // 将token写入localstorage
+                        storage.setItem('oneStep_token', data.token);
+                        this.setUserInfo(data.user);
                         // 将消息同步到store
-                        this.setMsgTip({msgSwitch: true, msgText: 'dcdcdcdcd'});
+                        this.setMsgTip({msgSwitch: true, msgText: data.message});
+
+                        // 跳转到之前的页面
+                        let AimPath = this.$route.query.redirect || '/';
+                        this.$router.push(AimPath);
                     }
                     else {
                         this.setMsgTip({msgSwitch: true, msgText: data.message});
