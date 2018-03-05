@@ -6,9 +6,9 @@
                 @click-menu="handleClickHeaderMenu"
                 @click-back="handleClickHeaderBack">
             </app-header>
-            <articleHeader
+            <!-- <articleHeader
                 v-else>
-            </articleHeader>
+            </articleHeader> -->
 
             <!-- <app-sidebar
                 @hide-sidebar = "handleHideSidebar"

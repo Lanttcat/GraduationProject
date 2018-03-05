@@ -6,12 +6,15 @@ const Router = require('koa-router');
 const oneBcrypt = require('./oneBcrypt');
 
 let user = require('./api/user');
+let article = require('./api/article');
 const jwt = require('jsonwebtoken');
 
 let route = new Router();
 
 const secret = 'oneStep_secret'
 
+
+// 用户相关---------------------------------------------------------------------------
 route.get('/api/user', async (ctx) =>{
     // let {query} = ctx;
     // console.log(ctx.query)
@@ -107,6 +110,41 @@ route.put('/api/user', async (ctx) => {
         ctx.throw(500)
     }
     
+});
+
+// 文章相关------------------------------------------------------------------------
+
+route.post('/api/comment', async (ctx) => {
+    let commentInfo = {};
+    let {body} = ctx.request;
+    commentInfo.userId = body.userId;
+    commentInfo.content = body.content;
+    commentInfo.parentNodeId = body.parentNodeId;
+
+    let res = await article.addComment(body.articleId, commentInfo);
+    console.log(res);
+    ctx.response.type = 'json';
+    ctx.response.body = {
+        data: res
+    }
+});
+
+route.post('/api/article', async (ctx) => {
+    let {body} = ctx.request;
+    let res = await article.addArticle(body);
+    ctx.response.type = 'json';
+    ctx.response.body = {
+        data: res
+    }
+});
+route.get('/api/article', async (ctx) => {
+    let articleId = ctx.query.articleId;
+    console.log(articleId);
+    let res = await article.selectArticle(articleId);
+    ctx.response.type = 'json';
+    ctx.response.body = {
+        data: res
+    }
 });
 
 
