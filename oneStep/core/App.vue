@@ -1,7 +1,7 @@
 <template>
     <div id="app">
         <v-app>
-            <app-header v-if="themeStyle"
+            <app-header v-if="shellStyleControl.header === 1"
                 class="app-shell-header"
                 @click-menu="handleClickHeaderMenu"
                 @click-back="handleClickHeaderBack">
@@ -34,11 +34,11 @@
                     ></router-view>
             </transition>
             <app-bottom-navigator
-                v-if="themeStyle"
+                v-if="shellStyleControl.footer === 1"
                 class="app-shell-footer">
             </app-bottom-navigator>
             <article-bottom-navigator
-                v-else>
+                v-if="shellStyleControl.footer === 2">
 
             </article-bottom-navigator>
             <update-toast></update-toast>
@@ -69,6 +69,9 @@ export default {
         MsgTip
     },
     computed: {
+        ...mapState('global', [
+            'shellStyleControl'
+        ]),
         ...mapState('pageTransition', {
             pageTransitionType: state => state.type,
             pageTransitionEffect: state => state.effect
