@@ -8,7 +8,7 @@
         :multi-line="mode === 'multi-line'"
         :vertical="mode === 'vertical'"
         v-model="snackbar">
-        {{ msgText }}
+        {{ message.msgText }}
         <v-btn flat color="pink" @click.native="snackbar = false">知道了~</v-btn>
     </v-snackbar>
 </template>
@@ -33,7 +33,7 @@ export default {
     },
     watch: {
         msgSwitch() {
-            this.snackbar = this.msgSwitch;
+            this.snackbar = this.message.msgSwitch;
             setTimeout(() => {
                 this.setMsgTip({msgSwitch: false, msgText: ''});
             }, this.timeout);
@@ -41,8 +41,7 @@ export default {
     },
     computed: {
         ...mapState('global', [
-            'msgSwitch',
-            'msgText'
+            'message'
         ])
     }
 }

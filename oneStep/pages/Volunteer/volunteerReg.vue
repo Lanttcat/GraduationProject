@@ -1,5 +1,6 @@
 <template>
     <div>
+        <sub-header :subHeaderData=settingListArray></sub-header>
         <v-form v-model="valid">
         <v-text-field
             label="标题"
@@ -24,15 +25,23 @@
     </div>
 </template>
 <script>
+import subHeader from '@/components/SubHeader';
 export default {
-   name: 'volunteerReg',
-   data() {
-       return {
-           valid: '',
-           e1: '',
-           email: ''
-       }
-   }
+    name: 'volunteerReg',
+    data() {
+        return {
+            valid: '',
+            e1: '',
+            email: '',
+            settingListArray: {
+                title: '注册成为志愿者',
+                leftIcon: 'arrow_back'
+            },
+        }
+    },
+    components: {
+        'sub-header': subHeader
+    },
 }
 </script>
 <style lang="stylus" scoped>
