@@ -10,7 +10,7 @@ export let state = () => {
                 name: '我的收藏',
                 icon: '',
                 route: {
-                    path: '/setting'
+                    path: '/collection'
                 }
             },
             {
@@ -26,7 +26,7 @@ export let state = () => {
                 name: '陪玩',
                 icon: '',
                 route: {
-                    path: '/companion/Publish'
+                    path: '/companion/'
                 }
             },
             {

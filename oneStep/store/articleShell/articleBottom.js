@@ -9,20 +9,24 @@
     return {
         btns: [
             {
-                name: 'zan',
-                icon: 'good'
+                name: 'returnBtn',
+                icon: '#icon-fanhui1'
             },
             {
-                name: 'reply',
-                icon: 'good'
+                name: 'blank',
+                icon: ''
+            },
+            {
+                name: 'zan',
+                icon: '#icon-favorite1'
+            },
+            {
+                name: 'comment',
+                icon: '#icon-pinglun'
             },
             {
                 name: 'celect',
-                icon: 'good'
-            },
-            {
-                name: 'share',
-                icon: 'good'
+                icon: '#icon-daohang'
             }
         ]
     }
