@@ -3,9 +3,9 @@
  * @author lanyixing(lanyixing@live.com)
  */
 
- export const SET_ARTICLE_BOTTOM = 'SET_ARTICLE_BOTTOM';
+export const SET_ARTICLE_BOTTOM = 'SET_ARTICLE_BOTTOM';
 
- export const state = () => {
+export const state = () => {
     return {
         btns: [
             {
@@ -28,6 +28,13 @@
                 name: 'celect',
                 icon: '#icon-daohang'
             }
-        ]
+        ],
+        commentCard: false
     }
- }
+}
+
+export const mutations =  {
+    isCommentCard(state, isOpen) {
+        state.commentCard = isOpen;
+    }
+}

@@ -2,26 +2,18 @@
     <v-layout>
         <v-flex xs12>
             <v-card flat>
-                <v-card-media src="../../static/img/testimg/1.jpg" height="200px">
+                <v-card-media :src="info.imgSrc" height="200px">
                 </v-card-media>
                 <v-card-title primary-title>
                     <div>
-                        <h3 class="headline mb-0">Kangaroo Valley Safari</h3>
-                        <div>Located two hours south of Sydney in the <br>Southern Highlands of New South Wales, ...</div>
+                        <h3 class="headline mb-0">{{ info.name }}</h3>
+                        <div>{{ info.intro }}</div>
                     </div>
                 </v-card-title>
                 <v-card-actions>
-                    <v-btn flat color="orange">评论</v-btn>
+                    <v-btn flat @click="upComment" color="orange">评论</v-btn>
                     <v-btn flat color="orange">Explore</v-btn>
                 </v-card-actions>
-                <!-- 评论框 -->
-                <v-text-field
-                    class="comment-text"
-                    rows='3'
-                    name="input-1"
-                    label="填写评论信息"
-                    multi-line>
-                </v-text-field>
                 <v-list two-line>
                     <template>
                         <v-subheader>评论</v-subheader>
@@ -45,22 +37,64 @@
                 </v-list>
             </v-card>
         </v-flex>
+        <article-commenet :dialog = dialog ></article-commenet>
     </v-layout>
 </template>
 <script>
+import articleComment from '../../components/articleComment';
 import { mapActions, mapState } from "vuex";
 function setState(store) {
     store.dispatch("appShell/appHeader/setAppHeader", {
         isShowHeader: false
     });
+    store.dispatch('global/setShellStyleControl', {
+        header: 3,
+        footer: 2
+    });
 }
 export default {
     name: 'articleDetail',
+    data() {
+        return {
+            info: [],
+            dialog: true
+        }
+    },
+    components: {
+        'article-commenet': articleComment
+    },
+    methods: {
+        upComment: () => {
+            console.log('dddddddd')
+            this.dialog = true
+        }
+    },
     async asyncData({ store, route }) {
         setState(store);
     },
     activated() {
         setState(this.$store);
+    },
+    created() {
+        console.log(this.$route.query.id)
+        this.$http.get("/api/scenicspotList", {
+            params: {
+                id: this.$route.query.id
+            }
+        }).then(
+            ({data}) => {
+                console.log(data);
+                if (data.data.status) {
+                    this.info = data.data.data[0];
+                    console.log(this.status)
+                    console.log(data);
+                    // this.setMsgTip({msgSwitch: true, msgText: '验证码发送成功'});
+                }
+                else {
+                    // this.setMsgTip({msgSwitch: true, msgText: '获取列表失败'});
+                }
+            }
+        );
     }
 }
 </script>

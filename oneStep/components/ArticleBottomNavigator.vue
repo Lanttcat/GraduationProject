@@ -37,7 +37,7 @@ export default {
                     this.$router.go(-1);
                 },
                 comment: () => {
-                    
+                    this.$store.commit('articleShell/articleBottom/isCommentCard', true);
                 },
                 blank: () => {
                     return;
