@@ -6,13 +6,13 @@
             <!-- 一般三到四个 -->
             <v-layout
                 v-for="item in ssList"
-                :key="item.ssId"
+                :key="item._id"
                 row
                 class="card-item">
                 <v-flex xs6>
                   <div style="text-align: left">
-                    <div class="headline" @click="TurnToArticle('11')">{{ item.ssTitle }}</div>
-                    <div class="headline-sub">{{ item.ssSubTitle }}</div>
+                    <div class="headline" @click="TurnToArticle(item._id)">{{ item.name }}</div>
+                    <div class="headline-sub">{{ item.intro }}</div>
                     <v-chip
                         v-for="tag in item.tag"
                         :key="tag.id"
@@ -24,8 +24,7 @@
                   </div>
                 </v-flex>
                 <v-flex x6>
-                    <img
-                      src="../static/img/testimg/1.jpg">
+                    <img :src="item.imgSrc">
                     <div>
                         <span>{{ item.browserNumber }}</span>
                         <span>{{ item.zanNumber }}</span>
@@ -99,42 +98,18 @@ function setState(store) {
             alt: 'logo'
         }
     });
+    store.dispatch('global/setShellStyleControl', {
+        header: 1,
+        footer: 1
+    });
 }
 
 export default {
     name: 'index',
     data () {
         return {
-            ssList: [
-                {
-                    ssId: 1223,
-                    ssTitle: '测试cadlajdjll名字1',
-                    ssSubTitle: '测试的副标题或者作者名',
-                    tag: ['推荐', '景点'],
-                    ssImg: '../static/img/testimg/1.JPG',
-                    browserNumber: '1111',
-                    zanNumber: '222'
-                },
-                {
-                    ssId: 126623,
-                    ssTitle: '测试名字2',
-                    ssSubTitle: '测试的副标题',
-                    tag: ['推荐', '景点'],
-                    ssImg: '../static/img/testimg/1.JPG',
-                    browserNumber: '1111',
-                    zanNumber: '222'
-                },
-                {
-                    ssId: 125523,
-                    ssTitle: '测试名字3',
-                    ssSubTitle: '测试的副标题',
-                    tag: ['推荐', '景点'],
-                    ssImg: '../static/img/testimg/1.JPG',
-                    browserNumber: '1111',
-                    zanNumber: '222'
-                }
-
-            ],
+            
+            ssList: [],
             items: [
                 {
                     src: '../static/img/testimg/1.JPG'
@@ -165,16 +140,55 @@ export default {
     activated() {
         setState(this.$store);
     },
+    created() {
+        this.$http.get("/api/scenicspot", {
+            params: {
+                num: 3
+            }
+        }).then(
+            ({data}) => {
+                console.log(data);
+                if (data.data.status) {
+                    this.ssList = data.data.data;
+                    console.log(this.status)
+                    console.log(data);
+                    // this.setMsgTip({msgSwitch: true, msgText: '验证码发送成功'});
+                }
+                else {
+                    // this.setMsgTip({msgSwitch: true, msgText: '获取列表失败'});
+                }
+            }
+        );
+    },
     components: {
         'loacl-header': loaclHeader
     },
     methods: {
-        TurnToArticle: function (item) {
+        getSSList: () => {
+            this.$http.get("/api/scenicspot", {
+                params: {
+                    num: 3
+                }
+            }).then(
+                ({data}) => {
+                    console.log(data);
+                    if( data.status) {
+                        this.ssList = data.data;
+                        console.log(data);
+                        this.setMsgTip({msgSwitch: true, msgText: '验证码发送成功'});
+                    }
+                    else {
+                        this.setMsgTip({msgSwitch: true, msgText: '获取列表失败'});
+                    }
+                }
+            );
+        },
+        TurnToArticle: function (id) {
             console.log(1111)
             this.$router.push({
                 path: 'article',
                 query: {
-                    id: 111111
+                    id: id
                 }
             });
         }

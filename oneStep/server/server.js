@@ -7,15 +7,15 @@ const oneBcrypt = require('./oneBcrypt');
 
 let user = require('./api/user');
 let article = require('./api/article');
+let scenicspot = require('./api/scenicspot');
 const jwt = require('jsonwebtoken');
 
 let route = new Router();
 
-const secret = 'oneStep_secret'
-
+const secret = 'oneStep_secret';
 
 // 用户相关---------------------------------------------------------------------------
-route.get('/api/user', async (ctx) =>{
+route.get('/api/user', async (ctx) => {
     // let {query} = ctx;
     // console.log(ctx.query)
     let phone = ctx.query.userPhone;
@@ -29,7 +29,7 @@ route.get('/api/user', async (ctx) =>{
         ctx.response.body = {
             status: status,
             data: res
-        }
+        };
     }
     catch (err) {
         console.log(err);
@@ -38,55 +38,58 @@ route.get('/api/user', async (ctx) =>{
 
 // 注册
 route.post('/api/user', async (ctx) => {
-    const { body } = ctx.request;
+    const {body} = ctx.request;
     body.hashPassword = await oneBcrypt.getPasswrdHash(body.userPassword);
     console.log(body.hashPassword);
     if (!body.hashPassword) {
         ctx.body = {
-            message: '服务器繁忙',
-        }
+            message: '服务器繁忙'
+        };
     }
+
     console.log(`注册接收到的数据为${body}`);
     try {
         let res = await user.registration(body);
         console.log(res);
         if (!res) {
-            ctx.status = 401
+            ctx.status = 401;
             ctx.body = {
-                message: '服务器繁忙',
-            }
+                message: '服务器繁忙'
+            };
         }
         else {
             ctx.body = {
                 status: true,
                 message: '注册成功'
-            }
+            };
         }
-    } catch (error) {
-        ctx.throw(500)
     }
-    
+    catch (error) {
+        ctx.throw(500);
+    }
+
 });
 
 // 登录
 route.put('/api/user', async (ctx) => {
-    const { body } = ctx.request;
+    const {body} = ctx.request;
     console.log(body);
     try {
         const userInfo = await user.login(body);
         console.log(userInfo.length);
         if (userInfo.length < 1) {
-            ctx.status = 200
+            ctx.status = 200;
             ctx.body = {
-                message: '用户名错误',
-            }
+                message: '用户名错误'
+            };
             return;
         }
+
         // 匹配密码是否相等
         let flag = await oneBcrypt.comparePassword(body.userPassword, userInfo[0].upassword);
         if (flag) {
             delete userInfo[0].upassword;
-            ctx.status = 200
+            ctx.status = 200;
             ctx.body = {
                 status: true,
                 message: '登录成功',
@@ -97,19 +100,21 @@ route.put('/api/user', async (ctx) => {
                     // 设置 token 过期时间
                     exp: Math.floor(Date.now() / 1000) + (60 * 60), // 60 seconds * 60 minutes = 1 hour
                 }, secret)
-            }
-        } else {
-            ctx.status = 200
+            };
+        }
+        else {
+            ctx.status = 200;
             ctx.body = {
-                message: '密码错误',
+                message: '密码错误'
             };
             return;
         }
-    } catch (error) {
-        console.log(error);
-        ctx.throw(500)
     }
-    
+    catch (error) {
+        console.log(error);
+        ctx.throw(500);
+    }
+
 });
 
 // 文章相关------------------------------------------------------------------------
@@ -126,7 +131,7 @@ route.post('/api/comment', async (ctx) => {
     ctx.response.type = 'json';
     ctx.response.body = {
         data: res
-    }
+    };
 });
 
 route.post('/api/article', async (ctx) => {
@@ -135,7 +140,7 @@ route.post('/api/article', async (ctx) => {
     ctx.response.type = 'json';
     ctx.response.body = {
         data: res
-    }
+    };
 });
 route.get('/api/article', async (ctx) => {
     let articleId = ctx.query.articleId;
@@ -144,8 +149,27 @@ route.get('/api/article', async (ctx) => {
     ctx.response.type = 'json';
     ctx.response.body = {
         data: res
-    }
+    };
 });
 
+// 获取景点
+route.get('/api/scenicspot', async (ctx) => {
+    let num = ctx.query.num;
+    console.log(num);
+    let res = await scenicspot.selectSomeScenicspot(num);
+    ctx.response.type = 'json';
+    ctx.response.body = {
+        data: res
+    };
+});
+route.get('/api/scenicspotList', async (ctx) => {
+    let id = ctx.query.id;
+    console.log(id);
+    let res = await scenicspot.selectScenicspot(id);
+    ctx.response.type = 'json';
+    ctx.response.body = {
+        data: res
+    };
+});
 
-module.exports =  route;
+module.exports = route;
