@@ -12,7 +12,7 @@ let Schema = mongo.Schema;
 const msgStatusText = {
     error: '评论失败，请稍后再次尝试',
     success: '评论成功'
-}
+};
 
 // 定义Schema
 
@@ -48,15 +48,19 @@ let scenicspotSchema = new Schema({
             scenicspotId: Number
         }
     ]
-}, {collection: 'scenicspot'});
+}, {
+    collection: 'scenicspot'
+});
 
 let Scenicspot = mongo.model('scenicspot', scenicspotSchema);
 
 scenicspotSchema.statics.queryscenicspot = async function(aid) {
     let data = {};
-    let res = await this.find({userId: aid});
+    let res = await this.find({
+        userId: aid
+    });
     return res;
-}
+};
 
 // 关闭连接
 // mongoose.disconnect();
@@ -91,7 +95,9 @@ let scenicspot = {
         let result = {};
         // 查询文章
         try {
-            let res = await Scenicspot.find({_id: scenicspotId});
+            let res = await Scenicspot.find({
+                _id: scenicspotId
+            });
             // let res = await scenicspot.queryscenicspot(scenicspotId);
             console.log(res);
             result.message = '获取文章成功';
@@ -109,18 +115,22 @@ let scenicspot = {
         let result = {};
         // 查询文章
         try {
-            let res = await Scenicspot.find({"index": {"$lt":4}}, {
-                "name": 1,
-                "userName": 1,
-                "imgSrc": 1,
-                "intro": 1
+            let res = await Scenicspot.find({
+                index: {
+                    $lt: 4
+                }
+            }, {
+                name: 1,
+                userName: 1,
+                imgSrc: 1,
+                intro: 1
             });
             // let res = await scenicspot.queryscenicspot(scenicspotId);
             console.log(res);
             res.forEach((item) => {
                 item.tags = ['景点', '热门'];
-                item.intro = item.intro.replace(/\s+/g,"").substr(0, 10) + '...';
-            })
+                item.intro = item.intro.replace(/\s+/g, '').substr(0, 10) + '...';
+            });
             result.message = '获取文章成功';
             result.status = true;
             result.data = res;
@@ -163,6 +173,6 @@ let scenicspot = {
         // 增加点赞
     }
 
-}
+};
 
 module.exports = scenicspot;

@@ -7,6 +7,7 @@ export const SET_PAGE_SWITCHING = 'SET_PAGE_SWITCHING';
 
 export const state = () => {
     return {
+
         /**
          * 多个页面是否处于切换中
          *

@@ -3,7 +3,7 @@
  * @author lavas
  */
 
- const setMsgTip = 'SETMSGTIP';
+const setMsgTip = 'SETMSGTIP';
 //  const setShellStyleControl = 'SETSHELLSTYLECONTROL';
 export const state = () => {
     return {

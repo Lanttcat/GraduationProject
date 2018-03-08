@@ -2,6 +2,7 @@ let GetMysqlConnectPool = require('./connectDatabase.js').GetMysqlConnectPool;
 let Log = require('../log/index');
 
 let pool = GetMysqlConnectPool();
+
 /**
  * 数据库操作
  *
@@ -23,7 +24,6 @@ function sqlQuery(sql) {
         });
     });
 }
-
 
 //  设计初衷：每个路由都可以基于基础类进行各自数据库的封装
 // class queryBase {

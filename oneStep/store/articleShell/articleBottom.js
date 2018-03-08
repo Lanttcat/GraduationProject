@@ -30,11 +30,11 @@ export const state = () => {
             }
         ],
         commentCard: false
-    }
-}
+    };
+};;
 
-export const mutations =  {
+export const mutations = {
     isCommentCard(state, isOpen) {
         state.commentCard = isOpen;
     }
-}
+};;

@@ -7,6 +7,7 @@ export const SET_APP_BOTTOM = 'SET_APP_BOTTOM';
 
 export const state = () => {
     return {
+
         /**
          * 是否展示顶部导航栏
          *
@@ -55,7 +56,7 @@ export const state = () => {
                 icon: '#icon-add',
                 text: '',
                 route: {
-                    name:'edit',
+                    name: 'edit',
                     path: '/edit'
                 },
                 center: true
@@ -83,4 +84,3 @@ export const state = () => {
         ]
     };
 };
-

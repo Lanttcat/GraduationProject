@@ -18,7 +18,7 @@ export let state = () => {
                 id: 2,
                 name: '关于茶途',
                 icon: 'sent',
-                route:''
+                route: ''
             },
             {
                 id: 3,
@@ -35,5 +35,5 @@ export let state = () => {
                 icon: 'sent'
             }
         ]
-    }
-}
+    };
+};;

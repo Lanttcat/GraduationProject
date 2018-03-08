@@ -12,7 +12,7 @@ let Schema = mongo.Schema;
 const msgStatusText = {
     error: '评论失败，请稍后再次尝试',
     success: '评论成功'
-}
+};
 
 // 定义Schema
 let articleSchema = new Schema({
@@ -37,15 +37,19 @@ let articleSchema = new Schema({
             articleId: Number
         }
     ]
-}, {collection: 'article'});
+}, {
+    collection: 'article'
+});
 
 let Article = mongo.model('article', articleSchema);
 
 articleSchema.statics.queryArticle = async function(aid) {
     let data = {};
-    let res = await this.find({userId: aid});
+    let res = await this.find({
+        userId: aid
+    });
     return res;
-}
+};
 
 // 关闭连接
 // mongoose.disconnect();
@@ -84,7 +88,9 @@ let article = {
         let result = {};
         // 查询文章
         try {
-            let res = await Article.find({_id: articleId});
+            let res = await Article.find({
+                _id: articleId
+            });
             // let res = await Article.queryArticle(articleId);
             console.log(res);
             result.message = '获取文章成功';
@@ -129,6 +135,6 @@ let article = {
         // 增加点赞
     }
 
-}
+};
 
 module.exports = article;

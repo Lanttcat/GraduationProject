@@ -4,6 +4,7 @@
 
 export let state = () => {
     return {
+
         /**
          * 用户登录状态 1. 登录 0： 未登录 2: 异常，需要设定自动注销
          */
@@ -24,8 +25,8 @@ export let state = () => {
                 }
             }
         }
-    }
-}
+    };
+};;
 
 export const mutations = {
     syncUserInfo(state, userData) {

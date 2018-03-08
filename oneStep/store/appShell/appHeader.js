@@ -8,6 +8,7 @@ export const SET_APP_HEADER = 'SET_APP_HEADER';
 export const state = () => {
     return {
         // 导航栏默认透明，尽量统一样式
+
         /**
          * 是否展示顶部导航栏
          *
@@ -25,7 +26,7 @@ export const state = () => {
         // 是否显示搜索栏
         isShowInputSearch: false,
         isShowBtnSearch: false,
-        
+
         // 左侧按钮 type: logo/icon src:名称或src
         leftBtn: {
             isShow: true,

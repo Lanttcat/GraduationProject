@@ -2,8 +2,9 @@
  * 服务器日志模块-系统运行日志
  */
 
- const fs = require('fs');
- const path = require('path');
+const fs = require('fs');
+const path = require('path');
+
 /**
  * 1. 创建文件
  * 2. 输入
@@ -11,8 +12,8 @@
  */
 
 class LogSystem {
-    constructor (logFileName) {
-        this.logFileName =  path.normalize(__dirname + '/logger/' + logFileName);
+    constructor(logFileName) {
+        this.logFileName = path.normalize(__dirname + '/logger/' + logFileName);
     }
 
     log(infoObj) {

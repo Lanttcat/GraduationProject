@@ -6,10 +6,11 @@ module.exports = (ctx, next) => {
         if (err.status === 401) {
             ctx.status = 401;
             ctx.body = {
-            error: err.originalError ? err.originalError.message : err.message,
+                error: err.originalError ? err.originalError.message : err.message
             };
-        } else {
+        }
+        else {
             throw err;
         }
     });
-}
+};

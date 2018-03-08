@@ -8,13 +8,12 @@ const SMSClient = require('@alicloud/sms-sdk');
 const accessKeyId = 'LTAIc4fl7xr9G8Un';
 const secretAccessKey = 'Es8cipUuolxlBmL2Jh5xRSJKtdCTW3';
 
-//初始化sms_client
+// 初始化sms_client
 let smsClient = new SMSClient({accessKeyId, secretAccessKey});
-
 
 function createCode() {
     // 主要利用数学计算
-    let codeRandom =  Math.round(Math.random()*10000);
+    let codeRandom = Math.round(Math.random() * 10000);
 
     return codeRandom;
 }
@@ -40,13 +39,11 @@ async function sendCode(phoneNum) {
         code = res.Code === 'OK' ? code : null;
 
         return code;
-        
+
     }
     catch (e) {
         console.log(e);
     }
-    
-
 }
 
 module.exports = sendCode;

@@ -11,7 +11,7 @@ const isProduct = process.env.NODE_ENV === 'production';
 // headless
 const dbConfig = {
     prod: {
-        connectionLimit : 10,
+        connectionLimit: 10,
         host: '123.207.150.130',
         port: '3306',
         user: 'root',
@@ -19,7 +19,7 @@ const dbConfig = {
         database: 'onestep_base'
     },
     dev: {
-        connectionLimit : 10,
+        connectionLimit: 10,
         host: '123.207.150.130',
         port: '3306',
         user: 'root',
@@ -27,8 +27,6 @@ const dbConfig = {
         database: 'onestep_base'
     }
 };
-
-
 
 /**
  * 初始化数据库实例
@@ -39,7 +37,7 @@ const dbConfig = {
  */
 function initDB(config) {
     try {
-        let pool  = mysql.createPool(config);
+        let pool = mysql.createPool(config);
         return pool;
     }
     catch (e) {
@@ -71,10 +69,9 @@ function GetMysqlConnectPool() {
         });
         return;
     }
-    
+
     return pool;
-};
+}
 
 exports.init = init;
 exports.GetMysqlConnectPool = GetMysqlConnectPool;
-
