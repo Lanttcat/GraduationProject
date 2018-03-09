@@ -33,6 +33,8 @@ let scenicspotSchema = new Schema({
     comments: [
         {
             userId: Number,
+            userName: String,
+            star: Number,
             parentNodeId: Number,
             parentNodeName: String,
             content: String,
