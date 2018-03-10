@@ -84,6 +84,7 @@
 
 <script>
 import loaclHeader from '../components/LocalBanner'
+
 import {mapActions} from 'vuex';
 function setState(store) {
     store.dispatch('appShell/appHeader/setAppHeader', {
