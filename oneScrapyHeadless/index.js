@@ -84,8 +84,11 @@ function getList() {
 
                         infoObj.name = data.title;
                         infoObj.index = data.index;
+                        infoObj.tags = ['景点'];
+                        infoObj.star = 5;
+                        infoObj.zan = 0;
                         infoObj.userId = 0;
-                        infoObj.userName = '蚂蜂窝用户';
+                        infoObj.userName = '蚂蜂窝';
                         infoObj.imgSrc = getValue(document.querySelector('.bd > .pic-big > img'), 'src');
                         infoObj.intro = getValue(document.querySelector('.summary'), 'innerHTML');
                         infoObj.phone = getValue(document.querySelector('.tel > .content'), 'innerHTML');
@@ -97,7 +100,8 @@ function getList() {
                         let commentsList = document.querySelectorAll('.rev-list > ul > .rev-item');
                         commentsList.forEach((item) => {
                             commentsItem = {};
-                            commentsItem.star = item.querySelector('.s-star').className.toString().match(/\d/)[0] || 5;
+                            commentsItem.userName = '蚂蜂窝用户';
+                            commentsItem.star = parseInt(item.querySelector('.s-star').className.toString().match(/\d/)[0]) || 5;
                             commentsItem.content = item.querySelector('.rev-txt').innerHTML;
                             commentsItem.time = item.querySelector('.info .time').innerHTML;
                             commentsItem.userId = 0;
